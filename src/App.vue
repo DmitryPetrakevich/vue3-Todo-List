@@ -18,8 +18,12 @@
      />
      <HabitTracker
      v-else-if="activeTab === 'habits'"
-     
      />
+     <NotesView 
+     v-else-if="activeTab === 'notes'"
+     />
+
+     
 
   </div>
   
@@ -31,6 +35,7 @@ import Sidebar from './components/Sidebar.vue';
 import TodoList from './components/TodoList.vue';
 import HabitTracker from './components/HabitTracker.vue';
 import AddTodo from './components/AddTodo.vue';
+import NotesView from './components/Notes/NotesView.vue';
 
 export default {
   components: {
@@ -39,6 +44,7 @@ export default {
     TodoList,
     HabitTracker,
     AddTodo,
+    NotesView,
   },
 
   data() {

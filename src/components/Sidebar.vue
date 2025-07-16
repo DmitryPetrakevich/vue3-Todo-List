@@ -25,6 +25,7 @@ export default {
       tabs: [
         {id: 'todo', title: 'Todo-List'},
         {id: 'habits', title: 'Habits'},
+        {id: 'notes', title: 'Notes'},
       ]
 
     }
