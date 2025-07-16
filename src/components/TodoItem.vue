@@ -13,7 +13,13 @@
         > 
         {{ todo.title }}
       </span>
-        <button type="button" class="todo-item-btn">×</button>
+        <button 
+        @click="$emit('delete-todo', todo.id)"
+        type="button" 
+        class="todo-item-btn"
+        >
+        ×
+      </button>
     </div>
 
   </div>

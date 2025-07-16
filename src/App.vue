@@ -12,6 +12,7 @@
     />
     <TodoList 
     @toggle-completed="toggleCompleted"
+    @delete-todo="deleteTodo"
     v-if="activeTab === 'todo'"
     :todos="todos"
      />
@@ -60,6 +61,13 @@ export default {
         title,
         completed: false
       })
+    },
+
+    deleteTodo(todoId) {
+      const index = this.todos.findIndex(t => t.id === todoId); 
+      if (index !== -1) {
+        this.todos.splice(index, 1);
+      }
     },
 
     toggleCompleted(todoId) {
