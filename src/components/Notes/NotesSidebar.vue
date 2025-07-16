@@ -6,6 +6,7 @@
             v-for="note in notes"
             :key="note.id"
             @click="$emit('changeNote', note.id)"
+            :class="{active : note.id === activeNoteId}"
             >
             {{ note.title }}
 
@@ -20,17 +21,13 @@
 <script>
 export default {
     props: [
-        'activeNote'
+        'notes',
+        'activeNoteId',
     ],
 
     data() {
         return {
-            notes: [
-                { id: 1, title: 'Идеи проекта', text: 'Начать с базового UI, потом добавить API.' },
-                { id: 2, title: 'Заметка о Vue', text: 'Vue 3 использует Composition API.' },
-                { id: 3, title: 'Заметка о привычках', text: 'Нужно добавить трекинг по датам.' }
 
-            ]
         }
     }
 };
@@ -62,7 +59,7 @@ export default {
         font-size: 16px;
         font-weight: 500;
         margin-top: 10px;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
         border: none;
         border-radius: 5px;
         color: white;
@@ -70,6 +67,10 @@ export default {
         padding: 6px 0;
         cursor: pointer;
         transition: background-color 0.3s ease;
+
+        &.active {
+            background-color: #0909a2; // Активная заметка — синяя
+    }
 
         &:hover {
           background-color: #737373;
