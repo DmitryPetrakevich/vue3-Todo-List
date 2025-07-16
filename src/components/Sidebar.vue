@@ -36,10 +36,10 @@ export default {
 .sidebar {
     position: fixed;
     left: 0;
-    top: 110px;
+    top: 80px;
     width: 300px;
-    height: calc(100vh - 110px);    
-    border: solid 1px black;
+    height: calc(100vh - 80px);    
+    border: solid 1px grey;
     border-top: none;
     background-color: #e9edf5;
     

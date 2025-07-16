@@ -11,6 +11,7 @@
     @add-todo="addTodo"
     />
     <TodoList 
+    @toggle-completed="toggleCompleted"
     v-if="activeTab === 'todo'"
     :todos="todos"
      />
@@ -42,10 +43,10 @@ export default {
   data() {
     return {
       todos: [
-        {id: 1, title: "Сделать проект", complete: false },
-        {id: 2, title: "Почитал книгу", complete: true },
-        {id: 3, title: "Почитал документацию", complete: true },
-        {id: 4, title: "Почитал новоти", complete: true },
+        {id: 1, title: "Сделать проект", completed: false },
+        {id: 2, title: "Почитал книгу", completed: true },
+        {id: 3, title: "Почитал документацию", completed: true },
+        {id: 4, title: "Почитал новоти", completed: true },
       ],
 
       activeTab: 'todo'
@@ -57,8 +58,16 @@ export default {
       this.todos.push( {
         id: Date.now(),
         title,
-        complete: false
+        completed: false
       })
+    },
+
+    toggleCompleted(todoId) {
+      const todo = this.todos.find(t => t.id === todoId)
+
+      if(todo) {
+        todo.completed = !todo.completed;
+      }
 
     }
   }
@@ -69,7 +78,7 @@ export default {
 
 <style lang="less">
 .main {
-  margin-top: 110px;
+  margin-top: 80px;
   margin-left: 295px;
 }
 

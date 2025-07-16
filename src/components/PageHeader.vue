@@ -5,12 +5,6 @@
                 <img src="@/assets/images/logo.svg" class="page-header__logo-img"  width= "202" height= "147">
             </a>
 
-            <nav class="page-header__nav">
-                <a href="О" class="page-header__nav-link">О нас</a>
-                <a href="#" class="page-header__nav-link">Контакты</a>
-                <a href="#" class="page-header__nav-link">Сотрудниество</a>
-            </nav>
-
             <div class="page-header__theme">
                 <button class="page-header__theme-btn">
                     Светлая тема
@@ -33,7 +27,7 @@ export default {
     top: 0;
     left: 0;
     width: 100%;
-    height: 110px;
+    height: 80px;
     z-index: 100;
     background-color: #e9edf5;
     border-bottom: solid 1px grey;
@@ -56,22 +50,6 @@ export default {
     height: 100%;
     }
 
-    &__nav {
-        box-sizing: border-box;
-        display: flex;
-        align-items: baseline;
-        margin: 0 auto;
-    }
-
-    &__nav-link {
-        margin: 0 25px;
-        color: black;
-        font-weight: 600;
-        font-size: 18;
-        line-height: 25px;
-        text-decoration: none;
-    }
-
     &__logo {
         display: flex;
         align-items: center;
@@ -79,12 +57,91 @@ export default {
         padding: 5px 0;
     }
 
-    &__loog-img {
+    &__logo-img {
         display: block;
-        height: 40px;
+        height: 100px;
         width: auto;
         object-fit: contain;
 
+    }
+    
+    &__theme {
+    margin-left: 20px;
+  }
+
+    &__theme-btn {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 60px;
+        height: 30px;
+        padding: 0;
+        border: none;
+        border-radius: 15px;
+        background: linear-gradient(145deg, #42b983, #36996b);
+        cursor: pointer;
+        box-shadow: 
+        0 2px 5px rgba(0,0,0,0.2),
+        inset 0 0 0 1px rgba(255,255,255,0.1);
+        transition: all 0.3s ease;
+        overflow: hidden;
+
+        /* Текст внутри кнопки (скроем) */
+        color: transparent;
+        font-size: 0;
+
+        /* Переключатель (круглая часть) */
+        &::before {
+        content: '';
+        position: absolute;
+        left: 3px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 24px;
+        height: 24px;
+        background: white;
+        border-radius: 50%;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        /* Иконка солнца (светлая тема) */
+        &::after {
+        content: '☀️';
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 14px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        }
+
+        /* Состояние темной темы (добавится при переключении) */
+        .dark-theme & {
+        background: linear-gradient(145deg, #2c3e50, #34495e);
+
+        &::before {
+            left: calc(100% - 27px);
+        }
+
+        &::after {
+            content: '🌙';
+            left: 5px;
+            right: auto;
+            opacity: 1;
+        }
+        }
+
+        &:hover {
+        box-shadow: 
+            0 3px 8px rgba(0,0,0,0.3),
+            inset 0 0 0 1px rgba(255,255,255,0.2);
+        }
+
+        &:active {
+        transform: scale(0.95);
+        }
     }
 
 }

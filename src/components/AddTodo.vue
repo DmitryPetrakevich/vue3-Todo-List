@@ -3,13 +3,15 @@
     <div class="add-todo__container"> 
         <input
         v-model="text" 
-        class="add-todo-input" />
+        class="add-todo-input" 
+        placeholder="Добавить задачу..."
+        />
         <button
         type="submit" 
         class="add-todo-btn"
         @click="submitTodo"
         >
-        Добавить</button>
+        +</button>
     </div>
 
   </div>
@@ -76,8 +78,8 @@ export default {
   color: white;
   border: none;
   border-radius: 6px;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease;
 

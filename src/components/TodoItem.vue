@@ -4,9 +4,15 @@
         <input 
         type="checkbox" 
         class="todo-item-input" 
-        :checked="todo.complete"
+        :checked="todo.completed"
+        @change="handleToggle"
         />
-        <span class="todo-item-text"> {{ todo.title }}</span>
+        <span 
+        class="todo-item-text"
+        :class="{completed : todo.completed}"
+        > 
+        {{ todo.title }}
+      </span>
         <button type="button" class="todo-item-btn">×</button>
     </div>
 
@@ -23,6 +29,13 @@ export default {
         return {
             
         }
+    },
+
+    methods: {
+      handleToggle() {
+        this.$emit('toggle-completed', this.todo.id)
+
+      }
     }
 };
 </script>
@@ -61,11 +74,12 @@ export default {
   word-break: break-word; // если длинное слово — переносит
   transition: color 0.3s, text-decoration 0.3s; // плавные эффекты при смене состояния
 
-  // если задача завершена — зачёркиваем и делаем серой
-//   .todo-item[complete='true'] & {
-//     text-decoration: line-through;
-//     color: #aaa;
-//   }
+  &.completed {
+    text-decoration: line-through;
+    color: #aaa;
+  }
+
+
 }
 
 .todo-item-btn {

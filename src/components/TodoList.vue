@@ -5,6 +5,7 @@
         v-for="todo in todos"
         :key="todo.id"
         :todo="todo"
+        @toggle-completed="toggleCompleted"
         />
         
         
@@ -29,6 +30,12 @@ export default {
     data() {
         return {
 
+        }
+    },
+
+    methods: {
+        toggleCompleted(todoId) {
+            this.$emit('toggle-completed', todoId); // Прокидываем событие выше
         }
     }
 };
