@@ -1,17 +1,26 @@
 <template>
   <PageHeader />
-  <Sidebar />
+  <Sidebar 
+  :active-tab="activeTab"
+  @change-tab="activeTab = $event"
+
+  />
   <div class="main">
-    <AddTodo @add-todo="addTodo"/>
-    <TodoList :todos="todos" />
-    
-
-
+    <AddTodo 
+    v-if="activeTab === 'todo'"
+    @add-todo="addTodo"
+    />
+    <TodoList 
+    v-if="activeTab === 'todo'"
+    :todos="todos"
+     />
+     <HabitTracker
+     v-else-if="activeTab === 'habits'"
+     
+     />
 
   </div>
   
-
-
 </template>
 
 <script>
@@ -37,7 +46,9 @@ export default {
         {id: 2, title: "Почитал книгу", complete: true },
         {id: 3, title: "Почитал документацию", complete: true },
         {id: 4, title: "Почитал новоти", complete: true },
-      ]
+      ],
+
+      activeTab: 'todo'
     }
   },
 
@@ -58,7 +69,6 @@ export default {
 
 <style lang="less">
 .main {
-  background-color: #f5f5f5;
   margin-top: 110px;
   margin-left: 295px;
 }

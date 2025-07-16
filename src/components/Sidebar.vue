@@ -3,14 +3,12 @@
     <div class="sidebar__container">
         <button
         class="sidebar-btn"
+        v-for="tab in tabs"
+        :key="tab.id"
+        @click="$emit('changeTab', tab.id)"
+        :class="{active : activeTab === tab.id}"
         >
-        ToDo-List
-        </button>
-
-        <button
-        class="sidebar-btn"
-        >
-        TaskTraker
+        {{ tab.title }}
         </button>
     </div>
   </div>
@@ -18,6 +16,19 @@
 
 <script>
 export default {
+  props: [
+    'activeTab'
+  ],
+
+  data() {
+    return {
+      tabs: [
+        {id: 'todo', title: 'Todo-List'},
+        {id: 'habits', title: 'Habits'},
+      ]
+
+    }
+  }
 };
 </script>
 
