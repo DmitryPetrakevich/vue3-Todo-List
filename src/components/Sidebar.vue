@@ -42,7 +42,7 @@ export default {
     height: calc(100vh - 80px);    
     border: solid 1px grey;
     border-top: none;
-    background-color: #e9edf5;
+    background-color: #e2e2e2;
     
 
     &__container {

@@ -11,9 +11,14 @@
         :todo="todo"
         @toggle-completed="toggleCompleted"
         @delete-todo="handleDeleteTodo"
-        />
-        
-        
+        /> 
+
+        <div
+        v-if="todos.length === 0" class="no-todos"
+        >
+        <p> Тут пока нет задач </p>
+
+        </div>
 
     </transition-group>
 
@@ -85,5 +90,13 @@ export default {
 .todo-animation-move {
   transition: transform 0.5s ease;
 }
+}
+
+.no-todos {
+  margin-left: 240px;
+  margin-top: 20px;
+  color: #ef0000;
+  font-style: italic;
+  font-size: 20px;
 }
 </style>

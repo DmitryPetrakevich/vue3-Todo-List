@@ -29,7 +29,7 @@ export default {
     width: 100%;
     height: 80px;
     z-index: 100;
-    background-color: #e9edf5;
+    background-color: #e2e2e2;
     border-bottom: solid 1px grey;
 
     &__container {
