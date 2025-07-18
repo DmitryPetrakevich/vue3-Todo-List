@@ -11,6 +11,7 @@
         :todo="todo"
         @toggle-completed="toggleCompleted"
         @delete-todo="handleDeleteTodo"
+        @edit-todo="handleEditTodo"
         /> 
 
         <div
@@ -50,7 +51,11 @@ export default {
 
         handleDeleteTodo(todoId) {
             this.$emit('delete-todo', todoId);
-        }
+        },
+
+        handleEditTodo(payload) {
+            this.$emit('edit-todo', payload);
+        },
     }
 };
 </script>

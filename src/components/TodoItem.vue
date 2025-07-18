@@ -8,15 +8,35 @@
         @change="handleToggle"
         />
         <span 
+        v-if="!isEditing"
         class="todo-item-text"
         :class="{completed : todo.completed}"
         > 
         {{ todo.title }}
       </span>
+      <input
+      v-else
+      type="text"
+      class="todo-edit-input"
+      v-model="editInput"
+      ref="editInput"
+      @blur="finishEditing"
+      @keyup.enter="finishEditing"
+      />
+
+
+        <button
+        @click="startEditing"
+        type="button"
+        class="edit-btn"
+        >
+        ✏️
+        </button>
+
         <button 
         @click="$emit('delete-todo', todo.id)"
         type="button" 
-        class="todo-item-btn"
+        class="delete-btn"
         >
         ×
       </button>
@@ -33,15 +53,40 @@ export default {
 
     data() {
         return {
-            
+          isEditing: false,
+          editInput: this.todo.title,
         }
     },
 
     methods: {
       handleToggle() {
         this.$emit('toggle-completed', this.todo.id)
+      },
+
+      startEditing() {
+        this.isEditing = true;
+        this.editInput = this.todo.title;
+        this.$nextTick(() => {
+          if(this.$refs.editInput) {
+            this.$refs.editInput.focus();
+          }
+        });
+      },
+
+      finishEditing() {
+        this.isEditing = false;
+        const trimed = this.editInput.trim();
+        if(trimed) {
+          this.$emit('edit-todo', {
+            id: this.todo.id,
+            newTitle: trimed,
+          })
+        }
+
 
       }
+
+
     }
 };
 </script>
@@ -63,6 +108,16 @@ export default {
   align-items: center; // вертикальное выравнивание по центру
   gap: 12px; // расстояние между элементами (чекбокс, текст, кнопка)
   justify-content: space-between; // выталкиваем крайние элементы по краям
+}
+
+.todo-edit-input {
+  flex: 1;
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  padding: 4px 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
 .todo-item-input {
@@ -88,7 +143,7 @@ export default {
 
 }
 
-.todo-item-btn {
+.delete-btn {
   width: 26px;
   height: 26px;
   font-size: 18px;
@@ -103,8 +158,33 @@ export default {
 
   &:hover {
     background-color: #eee; // светлый фон при наведении
-    color: #000000; // чуть выразительнее
+    color: #ba0808; // чуть выразительнее
   }
 }
+
+.edit-btn {
+  width: 26px;
+  height: 26px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
+  color: #666;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+
+  &:hover {
+    background-color: #eee;
+    color: #000;
+  }
+}
+
 
 </style>

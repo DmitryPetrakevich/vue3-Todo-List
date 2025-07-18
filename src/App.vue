@@ -13,6 +13,7 @@
     <TodoList 
     @toggle-completed="toggleCompleted"
     @delete-todo="deleteTodo"
+    @edit-todo="editTodo"
     v-if="activeTab === 'todo'"
     :todos="todos"
      />
@@ -50,10 +51,10 @@ export default {
   data() {
     return {
       todos: [
-        {id: 1, title: "Сделать проект", completed: false },
-        {id: 2, title: "Почитал книгу", completed: true },
-        {id: 3, title: "Почитал документацию", completed: true },
-        {id: 4, title: "Почитал новоти", completed: true },
+        // {id: 1, title: "Сделать проект", completed: false },
+        // {id: 2, title: "Почитал книгу", completed: true },
+        // {id: 3, title: "Почитал документацию", completed: true },
+        // {id: 4, title: "Почитал новоти", completed: true },
       ],
 
       activeTab: 'todo'
@@ -73,6 +74,13 @@ export default {
       const index = this.todos.findIndex(t => t.id === todoId); 
       if (index !== -1) {
         this.todos.splice(index, 1);
+      }
+    },
+
+    editTodo({id, newTitle}) {
+      const todo = this.todos.find(t => t.id === id)
+      if(todo) {
+        todo.title = newTitle;
       }
     },
 

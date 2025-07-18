@@ -41,8 +41,9 @@ export default {
     width: 300px;
     height: calc(100vh - 80px);    
     border: solid 1px grey;
-    border-top: none;
-    background-color: #e2e2e2;
+    border-top: 3px solid black;
+    border-left: 3px solid black;
+    background-color: #f6faff;
     
 
     &__container {
@@ -60,20 +61,20 @@ export default {
         font-weight: 500;
         margin-top: 10px;
         margin-bottom: 5px;
-        border: none;
+        border: 1px solid darkgreen;
         border-radius: 5px;
-        color: white;
-        background-color: #4e4e4e;
+        color: black;
+        background-color: #ebf3ff;
         padding: 6px 0;
         cursor: pointer;
         transition: background-color 0.3s ease;
 
         &.active {
-            background-color: #0909a2; // Активная заметка — синяя
+            background-color: #95ceff; // Активная заметка — синяя
     }
 
         &:hover {
-          background-color: #0909a2;
+          background-color: #95ceff;
         }
 
         &:active {

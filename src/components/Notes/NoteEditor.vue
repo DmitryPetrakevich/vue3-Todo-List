@@ -2,7 +2,7 @@
   <div class="note-editor">
     <div class="note-editor__container">
         <textarea
-        v-model="note.text"
+        v-model="localText"
         >
             
         </textarea>
@@ -20,9 +20,25 @@ export default {
 
   data() {
     return {
- 
+      localText: ""
     }
   },
+
+  watch: {
+    note(newNote) {
+      this.localText = newNote.text;
+    },
+    localText(newVal) {
+      this.note.text = newVal;
+    }
+  },
+
+  created() {
+    if(this.note) {
+      this.localText = this.note.text;
+    }
+  }
+  
 };
 </script>
 
