@@ -3,8 +3,8 @@
   <Sidebar 
   :active-tab="activeTab"
   @change-tab="activeTab = $event"
-
   />
+  
   <div class="main">
     <AddTodo 
     v-if="activeTab === 'todo'"
@@ -14,6 +14,7 @@
     @toggle-completed="toggleCompleted"
     @delete-todo="deleteTodo"
     @edit-todo="editTodo"
+    @update-priority="updatePriority"
     v-if="activeTab === 'todo'"
     :todos="todos"
      />
@@ -23,11 +24,7 @@
      <NotesView 
      v-else-if="activeTab === 'notes'"
      />
-
-     
-
   </div>
-  
 </template>
 
 <script>
@@ -51,10 +48,10 @@ export default {
   data() {
     return {
       todos: [
-        // {id: 1, title: "Сделать проект", completed: false },
-        // {id: 2, title: "Почитал книгу", completed: true },
-        // {id: 3, title: "Почитал документацию", completed: true },
-        // {id: 4, title: "Почитал новоти", completed: true },
+        //  {id: 1, title: "Сделать проект", completed: false, priority: 'green' },
+        //  {id: 2, title: "Почитал книгу", completed: true, priority: 'green' },
+        //  {id: 3, title: "Почитал документацию", completed: true, priority: 'green' },
+        //  {id: 4, title: "Почитал новоти", completed: true, priority: 'green' },
       ],
 
       activeTab: 'todo'
@@ -90,10 +87,15 @@ export default {
       if(todo) {
         todo.completed = !todo.completed;
       }
+    },
 
+    updatePriority({id, priority}) {
+      const todo = this.todos.folter(t => t.id === id);
+      if(todo) {
+        todo.priority = priority;
+      }
     }
   }
-  
 }
 
 </script>
@@ -103,5 +105,4 @@ export default {
   margin-top: 80px;
   margin-left: 295px;
 }
-
 </style>

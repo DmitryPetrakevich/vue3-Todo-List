@@ -12,6 +12,7 @@
         @toggle-completed="toggleCompleted"
         @delete-todo="handleDeleteTodo"
         @edit-todo="handleEditTodo"
+        @update-priority="handleUpdatePriority"
         /> 
 
         <div
@@ -56,6 +57,10 @@ export default {
         handleEditTodo(payload) {
             this.$emit('edit-todo', payload);
         },
+
+        handleUpdatePriority({id, priority}) {
+          this.$emit('update-priority', {id, priority})
+        }
     }
 };
 </script>
@@ -70,32 +75,7 @@ export default {
         flex-direction: column;
         gap: 15px;
     }
-
-/* 1. Анимация ДОБАВЛЕНИЯ элемента */
-.todo-animation-enter-from {
-  opacity: 0;
-  transform: translateY(-20px); /* Начальное положение (выше) */
-}
-.todo-animation-enter-active {
-  transition: all 0.3s ease-out; /* Плавное появление */
-}
-
-/* 2. Анимация УДАЛЕНИЯ элемента */
-.todo-animation-leave-to {
-  opacity: 0;
-  transform: translateX(50px); /* Уезжает вправо */
-}
-.todo-animation-leave-active {
-  position: absolute; /* Важно! Чтобы соседние элементы плавно сдвигались */
-  width: 100%;
-  transition: all 0.4s ease-in;
-}
-
-/* 3. Анимация ПЕРЕМЕЩЕНИЯ (на будущее) */
-.todo-animation-move {
-  transition: transform 0.5s ease;
-}
-}
+  }
 
 .no-todos {
   margin-left: 240px;
@@ -104,4 +84,29 @@ export default {
   font-style: italic;
   font-size: 20px;
 }
+
+.todo-animation-enter-from {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+.todo-animation-enter-active {
+  transition: all 0.3s ease-out; 
+}
+
+.todo-animation-leave-to {
+  opacity: 0;
+  transform: translateX(50px); 
+}
+.todo-animation-leave-active {
+  position: absolute; // Чтобы соседние элементы плавно сдвигались 
+  width: 100%;
+  transition: all 0.4s ease-in;
+}
+
+// Анимация ПЕРЕМЕЩЕНИЯ (на будущее) 
+.todo-animation-move {
+  transition: transform 0.5s ease;
+}
+
+
 </style>
