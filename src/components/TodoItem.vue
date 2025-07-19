@@ -260,24 +260,40 @@ export default {
 }
 
 .priority-flag {
-  width: 16px;
-  height: 16px;
-  border-radius: 3px;
-  border: 1px solid #ccc;
+  width: 20px;
+  height: 24px;
+  position: relative;
   cursor: pointer;
-  transition: transform 0.2s;
+  margin-right: 8px;
+  border-radius: 2px 2px 0 0; 
+}
+
+/* Создаём треугольную "вырезку" снизу */
+.priority-flag::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 8px solid currentColor; 
 }
 
 .priority-flag.green {
-  background-color: #2ecc71;
+  background-color: #2ecc71;;
+  color: #2ecc71;;
 }
 
 .priority-flag.orange {
   background-color: #f39c12;
+  color: #f39c12;
 }
 
 .priority-flag.red {
   background-color: #e74c3c;
+  color: #e74c3c;
 }
 
 .priority-menu {
