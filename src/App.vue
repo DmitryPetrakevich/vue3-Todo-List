@@ -6,10 +6,20 @@
   />
   
   <div class="main">
-    <AddTodo 
-    v-if="activeTab === 'todo'"
-    @add-todo="addTodo"
-    />
+    <div class="add-todo-section">
+        <AddTodo 
+        v-if="activeTab === 'todo'"
+        @add-todo="addTodo"
+        />
+        <DeleteAllTodos 
+        v-if="activeTab === 'todo'"
+        @delete-todos="deleteTodos"
+
+        />
+
+    </div>
+
+    
     <TodoList 
     @toggle-completed="toggleCompleted"
     @delete-todo="deleteTodo"
@@ -34,6 +44,7 @@ import TodoList from './components/TodoList.vue';
 import HabitTracker from './components/HabitTracker.vue';
 import AddTodo from './components/AddTodo.vue';
 import NotesView from './components/Notes/NotesView.vue';
+import DeleteAllTodos from './components/DeleteAllTodos.vue';
 
 export default {
   components: {
@@ -43,6 +54,7 @@ export default {
     HabitTracker,
     AddTodo,
     NotesView,
+    DeleteAllTodos,
   },
 
   data() {
@@ -63,7 +75,8 @@ export default {
       this.todos.push( {
         id: Date.now(),
         title,
-        completed: false
+        completed: false,
+        priority: 'green'
       })
     },
 
@@ -72,6 +85,11 @@ export default {
       if (index !== -1) {
         this.todos.splice(index, 1);
       }
+    },
+
+    deleteTodos() {
+      console.log('Метод deleteTodos вызван');
+      this.todos = [];
     },
 
     editTodo({id, newTitle}) {
@@ -90,7 +108,7 @@ export default {
     },
 
     updatePriority({id, priority}) {
-      const todo = this.todos.folter(t => t.id === id);
+      const todo = this.todos.find(t => t.id === id);
       if(todo) {
         todo.priority = priority;
       }
@@ -104,5 +122,10 @@ export default {
 .main {
   margin-top: 80px;
   margin-left: 295px;
+  background-color: #f5f5f5;}
+
+.add-todo-section {
+  display: flex;
+  align-items: center;
 }
 </style>

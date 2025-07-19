@@ -131,14 +131,14 @@ export default {
         }
     },
 
-    watch: {
-      todo: {
-        immediate: true,
-        handler(newTodo) {
-          this.priority = newTodo.priority || 'green';
-        }
-      }
-    },
+    // watch: {
+    //   todo: {
+    //     immediate: true,
+    //     handler(newTodo) {
+    //       this.priority = newTodo.priority || 'green';
+    //     }
+    //   }
+    // },
 
     mounted() {
       document.addEventListener('click', this.closePriorityMenuOnClickOutside);
@@ -163,15 +163,15 @@ export default {
 }
 
 .todo-item.green {
-  border: 1px solid #4caf50; 
+  border: 2px solid #4caf50; 
 }
 
 .todo-item.orange {
-  border: 1px solid #ff9800; 
+  border: 2px solid #ff9800; 
 }
 
 .todo-item.red {
-  border: 1px solid #f44336; 
+  border: 2px solid #f44336; 
 }
 
 .todo-item__container {
@@ -311,8 +311,8 @@ export default {
 }
 
 .priority-option {
-  width: 14px;
-  height: 14px;
+  width: 24px;
+  height: 24px;
   border-radius: 3px;
   cursor: pointer;
   border: 1px solid #aaa;
