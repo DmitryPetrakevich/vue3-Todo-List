@@ -13,8 +13,14 @@
         />
         <DeleteAllTodos 
         v-if="activeTab === 'todo'"
-        @delete-todos="deleteTodos"
+        @delete-todos="showDeleteWindow = true"
+        />
 
+        <DeleteAllTodosWindow 
+        v-if="showDeleteWindow"
+        @cancel="showDeleteWindow = false"
+        @confirm="deleteTodos"
+        @show-delete-window="showDeleteWindow = false"
         />
 
     </div>
@@ -45,6 +51,8 @@ import HabitTracker from './components/HabitTracker.vue';
 import AddTodo from './components/AddTodo.vue';
 import NotesView from './components/Notes/NotesView.vue';
 import DeleteAllTodos from './components/DeleteAllTodos.vue';
+import DeleteAllTodosWindow from './components/DeleteAllTodosWindow.vue';
+
 
 export default {
   components: {
@@ -55,6 +63,7 @@ export default {
     AddTodo,
     NotesView,
     DeleteAllTodos,
+    DeleteAllTodosWindow,
   },
 
   data() {
@@ -66,7 +75,8 @@ export default {
         //  {id: 4, title: "Почитал новоти", completed: true, priority: 'green' },
       ],
 
-      activeTab: 'todo'
+      activeTab: 'todo',
+      showDeleteWindow: false,
     }
   },
 
@@ -88,8 +98,8 @@ export default {
     },
 
     deleteTodos() {
-      console.log('Метод deleteTodos вызван');
       this.todos = [];
+      this.showDeleteWindow = false;
     },
 
     editTodo({id, newTitle}) {
@@ -112,7 +122,7 @@ export default {
       if(todo) {
         todo.priority = priority;
       }
-    }
+    },    
   }
 }
 

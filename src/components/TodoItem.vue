@@ -131,6 +131,12 @@ export default {
         }
     },
 
+    computed: {
+      priority() {
+        return this.todo.priority;
+      }
+    },
+
     // watch: {
     //   todo: {
     //     immediate: true,

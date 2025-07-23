@@ -40,6 +40,7 @@ export default {
 <style lang="less">
 .add-todo {
   // margin-top: 0px; // отступ сверху (можно подогнать под макет)
+  width: 600px;
   display: flex;
   background-color: #f5f5f5;
   // justify-content: center; // размещение по центру страницы

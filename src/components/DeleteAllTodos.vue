@@ -18,11 +18,16 @@ export default {
 </script>
 
 <style scoped lang="less">
+
+.delete-all-todo {
+    position: relative;
+
+
+}
 .delete-all-todo-img {
     position: relative;
     top: 5px;
-    background-color: none;
-    border: none;
+    right: auto;
     cursor: pointer;
     transition: color 0.3s ease, transform 0.3s ease;
 
