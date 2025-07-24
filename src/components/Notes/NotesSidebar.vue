@@ -78,7 +78,7 @@ export default {
         }
 
         &:active {
-          background-color: #181818;
+          background-color: #4f9ee2;
         }
     }
 }
