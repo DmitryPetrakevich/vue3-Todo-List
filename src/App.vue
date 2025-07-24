@@ -16,12 +16,18 @@
         @delete-todos="showDeleteWindow = true"
         />
 
+        <TodosFilter>
+
+        </TodosFilter>
+
         <DeleteAllTodosWindow 
         v-if="showDeleteWindow"
         @cancel="showDeleteWindow = false"
         @confirm="deleteTodos"
         @show-delete-window="showDeleteWindow = false"
+        @keyup.enter="showDeleteWindow = false"
         />
+        
 
     </div>
 
@@ -52,6 +58,7 @@ import AddTodo from './components/AddTodo.vue';
 import NotesView from './components/Notes/NotesView.vue';
 import DeleteAllTodos from './components/DeleteAllTodos.vue';
 import DeleteAllTodosWindow from './components/DeleteAllTodosWindow.vue';
+import TodosFilter from './components/TodosFilter.vue';
 
 
 export default {
@@ -64,6 +71,7 @@ export default {
     NotesView,
     DeleteAllTodos,
     DeleteAllTodosWindow,
+    TodosFilter,
   },
 
   data() {

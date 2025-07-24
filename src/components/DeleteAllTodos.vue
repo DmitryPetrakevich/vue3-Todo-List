@@ -1,6 +1,6 @@
 <template>
     <div class="delete-all-todo">
-            <svg class="delete-all-todo-img" width="30px" height="30px" viewBox="0 0 24 24" fill="white"
+            <svg class="delete-all-todo-img" width="30px" height="30px" viewBox="0 0 24 24" fill="currentColor"
                 @click="$emit('delete-todos')"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -13,21 +13,28 @@
 </template>
 
 <script>
+import DeleteAllTodosWindow from './components/DeleteAllTodosWindow.vue';
+
 export default {
+    components: {
+        DeleteAllTodosWindow,
+    },
+
+    data() {
+        return {
+
+        }
+    }
+    
 };
 </script>
 
 <style scoped lang="less">
 
+
 .delete-all-todo {
     position: relative;
-
-
-}
-.delete-all-todo-img {
-    position: relative;
     top: 5px;
-    right: auto;
     cursor: pointer;
     transition: color 0.3s ease, transform 0.3s ease;
 

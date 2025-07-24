@@ -1,5 +1,8 @@
 <template>
-    <div class="delete-todos-window" @click.self="$emit('cancel')">
+    <div class="delete-todos-window" 
+    @click.self="$emit('cancel')"
+   
+    >
         <div class="delete-todos-window__container">
             <h2 class="delete-todos-window-title">
                 Подтверждение
@@ -34,16 +37,27 @@ export default {
     },
 
     mounted() {
-        document.body.classList.add('no-scroll')
+        document.body.classList.add('no-scroll');
+        document.addEventListener('keydown', this.handleKeyDown);
     },
 
     beforeUnmount() {
-        document.body.classList.remove('no-scroll')
+        document.body.classList.remove('no-scroll');
+        document.removeEventListener('keydown', this.handleKeyDown)
+    },
+
+    methods: {
+        handleKeyDown(e) {
+            if(e.key === 'Escape') {
+                this.$emit('cancel')
+            }
+        }
+        
     }
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 .delete-todos-window {
     position: fixed;
     inset: 0;
