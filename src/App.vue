@@ -16,16 +16,19 @@
         @delete-todos="showDeleteWindow = true"
         />
 
-        <TodosFilter>
+        <TodosFilter 
+        @sort="sortTodos"
+        />
+          
 
-        </TodosFilter>
+        
 
         <DeleteAllTodosWindow 
         v-if="showDeleteWindow"
         @cancel="showDeleteWindow = false"
         @confirm="deleteTodos"
         @show-delete-window="showDeleteWindow = false"
-        @keyup.enter="showDeleteWindow = false"
+        
         />
         
 
@@ -130,7 +133,24 @@ export default {
       if(todo) {
         todo.priority = priority;
       }
-    },    
+    },
+    
+     sortTodos(optionId) {
+    switch (optionId) {
+      case 1: // По приоритету ↑
+        this.todos.sort((a, b) => a.priority.localeCompare(b.priority));
+        break;
+      case 2: // По приоритету ↓
+        this.todos.sort((a, b) => b.priority.localeCompare(a.priority));
+        break;
+      case 3: // По алфавиту ↑
+        this.todos.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case 4: // По алфавиту ↓
+        this.todos.sort((a, b) => b.title.localeCompare(a.title));
+        break;
+    }
+  }
   }
 }
 
