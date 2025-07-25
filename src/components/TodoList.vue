@@ -15,11 +15,8 @@
         @update-priority="handleUpdatePriority"
         /> 
 
-        <div
-        v-if="todos.length === 0" class="no-todos"
-        >
+        <div v-if="todos.length === 0" class="no-todos">
         <p> Тут пока нет задач </p>
-
         </div>
 
     </transition-group>
@@ -40,14 +37,12 @@ export default {
     ],
 
     data() {
-        return {
-
-        }
+        return { }
     },
 
     methods: {
         toggleCompleted(todoId) {
-            this.$emit('toggle-completed', todoId); // Прокидываем событие выше
+            this.$emit('toggle-completed', todoId); 
         },
 
         handleDeleteTodo(todoId) {

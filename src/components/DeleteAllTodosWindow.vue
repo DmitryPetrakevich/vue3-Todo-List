@@ -1,7 +1,6 @@
 <template>
     <div class="delete-todos-window" 
     @click.self="$emit('cancel')"
-   
     >
         <div class="delete-todos-window__container">
             <h2 class="delete-todos-window-title">
@@ -51,8 +50,7 @@ export default {
             if(e.key === 'Escape') {
                 this.$emit('cancel')
             }
-        }
-        
+        } 
     }
 };
 </script>

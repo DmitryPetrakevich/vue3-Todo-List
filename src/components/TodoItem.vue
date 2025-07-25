@@ -49,7 +49,6 @@
         </div>
       </div>
 
-
         <button
         @click="startEditing"
         type="button"
@@ -122,7 +121,6 @@ export default {
       },
 
       closePriorityMenuOnClickOutside(event) {
-          // Проверяем, что клик был ВНЕ priority-flag-wrapper
           const menuWrapper = this.$el.querySelector('.priority-flag-wrapper');
           if (menuWrapper && !menuWrapper.contains(event.target)) {
             this.showPriorityMenu = false;
@@ -136,15 +134,6 @@ export default {
       }
     },
 
-    // watch: {
-    //   todo: {
-    //     immediate: true,
-    //     handler(newTodo) {
-    //       this.priority = newTodo.priority || 'green';
-    //     }
-    //   }
-    // },
-
     mounted() {
       document.addEventListener('click', this.closePriorityMenuOnClickOutside);
     },
@@ -157,7 +146,6 @@ export default {
 
 <style scoped lang="less">
 .todo-item {
-
   max-width: 700px; 
   margin-bottom: 6px; 
   padding: 10px 14px; 

@@ -12,16 +12,19 @@
         @add-todo="addTodo"
         />
         <DeleteAllTodos 
+        title="Удалить все задачи"
         v-if="activeTab === 'todo'"
         @delete-todos="showDeleteWindow = true"
         />
 
         <TodosFilter 
+        title="Фильтр"
         v-if="activeTab === 'todo'"
         @sort="sortTodos"
         />
 
         <UpdateTodos 
+        title="Удалить выполненные задачи"
         v-if="activeTab === 'todo'"
         @update-todos="updateTodos"
         />
@@ -39,6 +42,7 @@
 
     
     <TodoList 
+    class="todolist"
     @toggle-completed="toggleCompleted"
     @delete-todo="deleteTodo"
     @edit-todo="editTodo"
@@ -174,5 +178,10 @@ export default {
 .add-todo-section {
   display: flex;
   align-items: center;
+}
+
+.todolist {
+  margin-top: 20px;
+  margin-left: 10px;
 }
 </style>

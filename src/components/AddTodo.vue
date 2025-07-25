@@ -13,7 +13,6 @@
         >
         +</button>
     </div>
-
   </div>
 </template>
 
@@ -39,28 +38,26 @@ export default {
 
 <style lang="less">
 .add-todo {
-  // margin-top: 0px; // отступ сверху (можно подогнать под макет)
   width: 600px;
   display: flex;
   background-color: #f5f5f5;
-  // justify-content: center; // размещение по центру страницы
 }
 
 .add-todo__container {
-  display: flex; // размещаем инпут и кнопку по горизонтали
+  display: flex; 
   align-items: center;
-  gap: 10px; // промежуток между полем и кнопкой
-  max-width: 600px; // ограничение по ширине
+  gap: 10px; 
+  max-width: 600px; 
   width: 100%;
   padding: 12px 16px;
-  border: 1px solid #ddd; // рамка
+  border: 1px solid #ddd; 
   border-radius: 8px;
-  background-color: #f9f9f9; // очень светлый фон
+  background-color: #f9f9f9; 
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .add-todo-input {
-  flex: 1; // занимает всё свободное пространство
+  flex: 1; 
   padding: 8px 12px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -68,7 +65,7 @@ export default {
   outline: none;
 
   &:focus {
-    border-color: #42b983; // цвет фокуса (в духе Vue)
+    border-color: #42b983; 
     box-shadow: 0 0 0 2px rgba(66, 185, 131, 0.2);
   }
 }
@@ -92,5 +89,4 @@ export default {
     background-color: #2c7c57;
   }
 }
-
 </style>

@@ -9,7 +9,6 @@
                 <button class="page-header__theme-btn">
                     Светлая тема
                 </button>
-
             </div>
         </div>
     </header>
@@ -85,8 +84,6 @@ export default {
         inset 0 0 0 1px rgba(255,255,255,0.1);
         transition: all 0.3s ease;
         overflow: hidden;
-
-        /* Текст внутри кнопки (скроем) */
         color: transparent;
         font-size: 0;
 
@@ -143,7 +140,5 @@ export default {
         transform: scale(0.95);
         }
     }
-
 }
-
 </style>
