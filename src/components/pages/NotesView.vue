@@ -5,8 +5,6 @@
             <NoteEditor
             :note="activeNote"
 
-
-            
             />
             <NotesSidebar 
             :notes="notes"
@@ -22,8 +20,8 @@
 </template>
 
 <script>
-import NoteEditor from './NoteEditor.vue';
-import NotesSidebar from './NotesSidebar.vue';
+import NoteEditor from '../features/notes/NoteEditor.vue';
+import NotesSidebar from '../features/notes/NotesSidebar.vue';
 
 export default {
     components: {

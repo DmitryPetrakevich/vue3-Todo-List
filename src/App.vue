@@ -4,7 +4,7 @@
   :active-tab="activeTab"
   @change-tab="activeTab = $event"
   />
-  
+
   <div class="main">
     <div class="add-todo-section">
         <AddTodo 
@@ -34,13 +34,9 @@
         @cancel="showDeleteWindow = false"
         @confirm="deleteTodos"
         @show-delete-window="showDeleteWindow = false"
-        
         />
-        
-
     </div>
 
-    
     <TodoList 
     class="todolist"
     @toggle-completed="toggleCompleted"
@@ -61,23 +57,22 @@
 
 <script>
 import PageHeader from './components/PageHeader.vue';
-import Sidebar from './components/Sidebar.vue';
-import TodoList from './components/TodoList.vue';
-import HabitTracker from './components/HabitTracker.vue';
-import AddTodo from './components/AddTodo.vue';
-import NotesView from './components/Notes/NotesView.vue';
-import DeleteAllTodos from './components/DeleteAllTodos.vue';
-import DeleteAllTodosWindow from './components/DeleteAllTodosWindow.vue';
-import TodosFilter from './components/TodosFilter.vue';
-import UpdateTodos from './components/UpdateTodos.vue';
-
+import Sidebar from './components/features/todos/Sidebar.vue';
+import TodoList from './components/pages/TodoList.vue';
+import HabitsView from './components/pages/HabitsView.vue';
+import AddTodo from './components/features/todos/AddTodo.vue';
+import NotesView from './components/pages/NotesView.vue';
+import DeleteAllTodos from './components/features/todos/DeleteAllTodos.vue';
+import DeleteAllTodosWindow from './components/features/todos/DeleteAllTodosWindow.vue';
+import TodosFilter from './components/features/todos/TodosFilter.vue';
+import UpdateTodos from './components/features/todos/UpdateTodos.vue';
 
 export default {
   components: {
     PageHeader,
     Sidebar,
     TodoList,
-    HabitTracker,
+    HabitsView,
     AddTodo,
     NotesView,
     DeleteAllTodos,
@@ -90,9 +85,6 @@ export default {
     return {
       todos: [
         //  {id: 1, title: "Сделать проект", completed: false, priority: 'green' },
-        //  {id: 2, title: "Почитал книгу", completed: true, priority: 'green' },
-        //  {id: 3, title: "Почитал документацию", completed: true, priority: 'green' },
-        //  {id: 4, title: "Почитал новоти", completed: true, priority: 'green' },
       ],
 
       activeTab: 'todo',
