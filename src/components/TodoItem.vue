@@ -66,7 +66,6 @@
         ×
       </button>
     </div>
-
   </div>
 </template>
 
@@ -198,8 +197,8 @@ export default {
 }
 
 .todo-item-input {
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
   accent-color: #42b983; // делает чекбокс зелёным
   cursor: pointer; 
 }

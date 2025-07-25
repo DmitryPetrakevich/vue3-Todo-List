@@ -17,12 +17,15 @@
         />
 
         <TodosFilter 
+        v-if="activeTab === 'todo'"
         @sort="sortTodos"
         />
+
+        <UpdateTodos 
+        v-if="activeTab === 'todo'"
+        @update-todos="updateTodos"
+        />
           
-
-        
-
         <DeleteAllTodosWindow 
         v-if="showDeleteWindow"
         @cancel="showDeleteWindow = false"
@@ -62,6 +65,7 @@ import NotesView from './components/Notes/NotesView.vue';
 import DeleteAllTodos from './components/DeleteAllTodos.vue';
 import DeleteAllTodosWindow from './components/DeleteAllTodosWindow.vue';
 import TodosFilter from './components/TodosFilter.vue';
+import UpdateTodos from './components/UpdateTodos.vue';
 
 
 export default {
@@ -75,6 +79,7 @@ export default {
     DeleteAllTodos,
     DeleteAllTodosWindow,
     TodosFilter,
+    UpdateTodos,
   },
 
   data() {
@@ -136,21 +141,25 @@ export default {
     },
     
      sortTodos(optionId) {
-    switch (optionId) {
-      case 1: // По приоритету ↑
-        this.todos.sort((a, b) => a.priority.localeCompare(b.priority));
-        break;
-      case 2: // По приоритету ↓
-        this.todos.sort((a, b) => b.priority.localeCompare(a.priority));
-        break;
-      case 3: // По алфавиту ↑
-        this.todos.sort((a, b) => a.title.localeCompare(b.title));
-        break;
-      case 4: // По алфавиту ↓
-        this.todos.sort((a, b) => b.title.localeCompare(a.title));
-        break;
+      switch (optionId) {
+        case 1: // По приоритету ↑
+          this.todos.sort((a, b) => a.priority.localeCompare(b.priority, 'en'));
+          break;
+        case 2: // По приоритету ↓
+          this.todos.sort((a, b) => b.priority.localeCompare(a.priority, 'en'));
+          break;
+        case 3: // По алфавиту ↑
+          this.todos.sort((a, b) => a.title.localeCompare(b.title, 'en'));
+          break;
+        case 4: // По алфавиту ↓
+          this.todos.sort((a, b) => b.title.localeCompare(a.title, 'en'));
+          break;
+      }
+    },
+
+    updateTodos() {
+      this.todos = this.todos.filter(item => item.completed === false);
     }
-  }
   }
 }
 

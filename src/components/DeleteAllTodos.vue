@@ -37,7 +37,7 @@ export default {
     cursor: pointer;
     transition: all 0.3s ease;
 
-    :hover {
+    &:hover {
         color: rgb(187, 0, 0);
         transform: scale(1.1);
     }
