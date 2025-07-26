@@ -27,7 +27,6 @@ export default {
         {id: 'habits', title: 'Habits'},
         {id: 'notes', title: 'Notes'},
       ]
-
     }
   }
 };
@@ -44,12 +43,10 @@ export default {
     border-top: none;
     background-color: #e2e2e2;
     
-
     &__container {
         display: flex;
         flex-direction: column;
         align-items: center;
-
     }
 
     &-btn {

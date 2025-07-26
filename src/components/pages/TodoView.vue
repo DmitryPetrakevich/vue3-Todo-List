@@ -18,9 +18,7 @@
         <div v-if="todos.length === 0" class="no-todos">
         <p> Тут пока нет задач </p>
         </div>
-
     </transition-group>
-
   </div>
 </template>
 
@@ -92,6 +90,7 @@ export default {
   opacity: 0;
   transform: translateX(50px); 
 }
+
 .todo-animation-leave-active {
   position: absolute; // Чтобы соседние элементы плавно сдвигались 
   width: 100%;
@@ -102,6 +101,4 @@ export default {
 .todo-animation-move {
   transition: transform 0.5s ease;
 }
-
-
 </style>
