@@ -1,29 +1,36 @@
 <template>
   <div>
     <div class="add-todo-section">
-      <AddTodo @add-todo="addTodo" />
+      <AddTodo @add-todo="todoStore.addTodo" />
       <DeleteAllTodos @delete-todos="showDeleteWindow = true" />
-      <TodosFilter @sort="sortTodos" />
-      <UpdateTodos @update-todos="updateTodos" />
+      <TodosFilter @sort="todoStore.sortTodos" />
+      <UpdateTodos @update-todos="todoStore.updateTodos" />
       
       <DeleteAllTodosWindow
         v-if="showDeleteWindow"
         @cancel="showDeleteWindow = false"
-        @confirm="deleteAllTodos"
+        @confirm=" () => {
+          todoStore.deleteAllTodos()
+          showDeleteWindow = false
+        }"
       />
     </div>
 
     <TodoView
       :todos="todos"
-      @toggle-completed="toggleCompleted"
-      @delete-todo="deleteTodo"
-      @edit-todo="editTodo"
-      @update-priority="updatePriority"
+      @toggle-completed="id => todoStore.toggleCompleted(id)"
+      @delete-todo="id => todoStore.deleteTodo(id)"
+      @edit-todo="payload => todoStore.editTodo(payload)"
+      @update-priority="payload => todoStore.updatePriority(payload)"
     />
   </div>
 </template>
 
 <script>
+import { useTodoStore } from '@/stores/todoStore'
+import { storeToRefs } from 'pinia'
+import { ref } from 'vue'
+
 import AddTodo from './AddTodo.vue'
 import DeleteAllTodosWindow from './DeleteAllTodosWindow.vue'
 import DeleteAllTodos from './DeleteAllTodos.vue'
@@ -40,55 +47,16 @@ export default {
     UpdateTodos,
     TodoView
   },
-  data() {
+  setup() {
+    const todoStore = useTodoStore()
+    const { todos } = storeToRefs(todoStore)
+
     return {
-      todos: [],
-      showDeleteWindow: false
+      todos,
+      todoStore,
+      showDeleteWindow: ref(false)
     }
   },
-  methods: {
-    addTodo(title) {
-      this.todos.push({ id: Date.now(), title, completed: false, priority: 'green' })
-    },
-    deleteTodo(id) {
-      this.todos = this.todos.filter(todo => todo.id !== id)
-    },
-    deleteAllTodos() {
-      this.todos = []
-      this.showDeleteWindow = false
-    },
-    editTodo({ id, newTitle }) {
-      const todo = this.todos.find(t => t.id === id)
-      if (todo) todo.title = newTitle
-    },
-    toggleCompleted(id) {
-      const todo = this.todos.find(t => t.id === id)
-      if (todo) todo.completed = !todo.completed
-    },
-    updatePriority({ id, priority }) {
-      const todo = this.todos.find(t => t.id === id)
-      if (todo) todo.priority = priority
-    },
-    sortTodos(optionId) {
-      switch (optionId) {
-        case 1: // По приоритету ↑
-          this.todos.sort((a, b) => a.priority.localeCompare(b.priority))
-          break
-        case 2: // По приоритету ↓
-          this.todos.sort((a, b) => b.priority.localeCompare(a.priority))
-          break
-        case 3: // По алфавиту ↑
-          this.todos.sort((a, b) => a.title.localeCompare(b.title))
-          break
-        case 4: // По алфавиту ↓
-          this.todos.sort((a, b) => b.title.localeCompare(a.title))
-          break
-      }
-    },
-    updateTodos() {
-      this.todos = this.todos.filter(todo => !todo.completed)
-    }
-  }
 }
 </script>
 
