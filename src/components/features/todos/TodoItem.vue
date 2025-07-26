@@ -25,6 +25,7 @@
       />
 
       <div class="priority-flag-wrapper"> 
+
         <div
         class="priority-flag"
         :class="priority"
@@ -48,6 +49,13 @@
           </div>
         </div>
       </div>
+
+        <input
+        type="date"
+        v-model="localDate"
+        @change="updateDate"
+        class="todo-date"
+        />
 
         <button
         @click="startEditing"
@@ -80,7 +88,8 @@ export default {
           editInput: this.todo.title,
           priority: this.todo.priority || 'green',
           showPriorityMenu: false,
-          priorityOptions: ['green', 'orange', 'red']
+          priorityOptions: ['green', 'orange', 'red'],
+          localDate: this.todo.date || null,
         }
     },
 
@@ -125,7 +134,12 @@ export default {
           if (menuWrapper && !menuWrapper.contains(event.target)) {
             this.showPriorityMenu = false;
           }
-        }
+      },
+
+      updateDate() {
+        this.$emit('update-date', {id: this.todo.id, date: this.localDate})
+      }
+
     },
 
     computed: {
@@ -170,7 +184,7 @@ export default {
 .todo-item__container {
   display: flex; 
   align-items: center; 
-  gap: 12px; 
+  gap: 2px; 
   justify-content: space-between; 
 }
 
@@ -222,6 +236,16 @@ export default {
     background-color: #eee; 
     color: #ba0808;
   }
+}
+
+.todo-date {
+  font-size: 9px;
+  padding: 2px 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 20px;
+  width: 70px;         
+  margin-right: 4px;
 }
 
 .edit-btn {

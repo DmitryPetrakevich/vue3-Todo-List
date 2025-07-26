@@ -6,7 +6,15 @@ export const useTodoStore = defineStore('todo', {
   }),
   actions: {
     addTodo(title) {
-      this.todos.push({ id: Date.now(), title, completed: false, priority: 'green' })
+        const today = new Date().toISOString().slice(0, 10); // формат: '2025-07-26'
+
+        this.todos.push({ 
+            id: Date.now(), 
+            title, 
+            completed: false, 
+            priority: 'green',
+            date: today,
+    })
       this.saveToLocalStorage()
     },
     deleteTodo(id) {
@@ -46,6 +54,20 @@ export const useTodoStore = defineStore('todo', {
         case 4:
           this.todos.sort((a, b) => b.title.localeCompare(a.title))
           break
+        case 5: // Сортировка по дедлайну (раньше → позже)
+            this.todos.sort((a, b) => {
+            const aDate = a.date ? new Date(a.date) : new Date(8640000000000000); // max date если пусто
+            const bDate = b.date ? new Date(b.date) : new Date(8640000000000000);
+            return aDate - bDate;
+        });
+        break;
+        case 6: // Сортировка по дедлайну (позже → раньше)
+            this.todos.sort((a, b) => {
+            const aDate = a.date ? new Date(a.date) : new Date(0); // min date если пусто
+            const bDate = b.date ? new Date(b.date) : new Date(0);
+            return bDate - aDate;
+        });
+        break;
       }
       this.saveToLocalStorage()
     },
@@ -53,8 +75,15 @@ export const useTodoStore = defineStore('todo', {
       this.todos = this.todos.filter(todo => !todo.completed)
       this.saveToLocalStorage()
     },
+    updateDate({ id, date }) {
+        const todo = this.todos.find(t => t.id === id);
+        if (todo) {
+            todo.date = date;
+        }
+        this.saveToLocalStorage()
+    },
     saveToLocalStorage() {
       localStorage.setItem('todos', JSON.stringify(this.todos))
-    }
+    },
   }
 })

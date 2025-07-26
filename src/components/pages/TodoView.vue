@@ -13,6 +13,7 @@
         @delete-todo="handleDeleteTodo"
         @edit-todo="handleEditTodo"
         @update-priority="handleUpdatePriority"
+        @update-date="todoStore.updateDate"
         /> 
 
         <div v-if="todos.length === 0" class="no-todos">
@@ -23,6 +24,7 @@
 </template>
 
 <script>
+import { useTodoStore } from '@/stores/todoStore';
 import TodoItem from '../features/todos/TodoItem.vue';
 
 export default {
@@ -35,7 +37,9 @@ export default {
     ],
 
     data() {
-        return { }
+        return {
+           todoStore: useTodoStore()
+        }
     },
 
     methods: {

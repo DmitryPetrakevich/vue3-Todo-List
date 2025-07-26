@@ -38,6 +38,8 @@ export default {
                 {id: 2, title: 'По  приоритету ↓'},
                 {id: 3, title: 'По  алфавиту ↑'},
                 {id: 4, title: 'По  алфавиту ↓'},
+                {id: 5, title: 'По  времени ↑'},
+                {id: 6, title: 'По  времени ↓'},
             ]
         }
     },
@@ -96,7 +98,6 @@ export default {
     top: 100%;
     left: 0;
     display: flex;
-    gap: 6px;
     width: 150px;
     height: auto;
     padding: 10px;
