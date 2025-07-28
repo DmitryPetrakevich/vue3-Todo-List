@@ -124,7 +124,7 @@ export default {
             this.$refs.editInput.focus();
             this.$refs.editInput.select(); 
           }
-        });
+      });
     },
 
       finishEditing() {
