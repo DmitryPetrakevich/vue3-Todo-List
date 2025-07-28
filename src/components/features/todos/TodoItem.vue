@@ -11,6 +11,7 @@
         v-if="!isEditing"
         class="todo-item-text"
         :class="{completed : todo.completed}"
+        @dblclick="startEditing"
         > 
         {{ todo.title }}
       </span>
@@ -115,15 +116,16 @@ export default {
         this.$emit('toggle-completed', this.todo.id)
       },
 
-      startEditing() {
+    startEditing() {
         this.isEditing = true;
         this.editInput = this.todo.title;
         this.$nextTick(() => {
-          if(this.$refs.editInput) {
+          if (this.$refs.editInput) {
             this.$refs.editInput.focus();
+            this.$refs.editInput.select(); 
           }
         });
-      },
+    },
 
       finishEditing() {
         this.isEditing = false;
