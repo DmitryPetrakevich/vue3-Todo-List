@@ -24,7 +24,8 @@
       @keyup.enter="finishEditing"
       />
 
-      <div class="priority-flag-wrapper"> 
+      <div class="todo-settings">
+        <div class="priority-flag-wrapper"> 
 
         <div
         class="priority-flag"
@@ -50,13 +51,6 @@
         </div>
       </div>
 
-        <input
-        type="date"
-        v-model="localDate"
-        @change="updateDate"
-        class="todo-date"
-        />
-
         <button
         @click="startEditing"
         type="button"
@@ -73,6 +67,28 @@
         ×
       </button>
     </div>
+
+      </div>
+      
+    <div class="todo-date-wrapper" @click.stop>
+    <span 
+      v-if="!isDateEditing" 
+      class="formatted-date" 
+      @click="startDateEditing"
+    >
+      {{ formattedDate || 'Без даты' }}
+    </span>
+
+    <input
+      v-else
+      type="date"
+      v-model="localDate"
+      @blur="finishDateEditing"
+      @keyup.enter="finishDateEditing"
+      class="todo-date-input"
+      ref="dateInput"
+    />
+</div>           
   </div>
 </template>
 
@@ -90,6 +106,7 @@ export default {
           showPriorityMenu: false,
           priorityOptions: ['green', 'orange', 'red'],
           localDate: this.todo.date || null,
+          isDateEditing: false,
         }
     },
 
@@ -138,14 +155,33 @@ export default {
 
       updateDate() {
         this.$emit('update-date', {id: this.todo.id, date: this.localDate})
-      }
+      },
 
+      startDateEditing() {
+        this.isDateEditing = true;
+        this.$nextTick(() => {
+          if (this.$refs.dateInput) {
+            this.$refs.dateInput.focus();
+          }
+       });
+     },
+
+      finishDateEditing() {
+        this.isDateEditing = false;
+        this.$emit('update-date', { id: this.todo.id, date: this.localDate });
+      }
     },
 
     computed: {
       priority() {
         return this.todo.priority;
-      }
+      },
+
+      formattedDate() {
+        if (!this.localDate) return '';
+        const options = { day: 'numeric', month: 'long' };
+        return new Date(this.localDate).toLocaleDateString('ru-RU', options);
+    } 
     },
 
     mounted() {
@@ -160,25 +196,13 @@ export default {
 
 <style scoped lang="less">
 .todo-item {
-  max-width: 700px; 
-  margin-bottom: 6px; 
-  padding: 10px 14px; 
+  max-width: 800px; 
+  margin-bottom: 2px; 
+  padding: 6px 6px; 
   border: 1px solid #ddd; 
   border-radius: 8px; 
   background-color: #fff; 
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); 
-}
-
-.todo-item.green {
-  border: 2px solid #4caf50; 
-}
-
-.todo-item.orange {
-  border: 2px solid #ff9800; 
-}
-
-.todo-item.red {
-  border: 2px solid #f44336; 
 }
 
 .todo-item__container {
@@ -188,26 +212,40 @@ export default {
   justify-content: space-between; 
 }
 
+.todo-item.green {
+  border: 1px solid #4caf50; 
+}
+
+.todo-item.orange {
+  border: 1px solid #ff9800; 
+}
+
+.todo-item.red {
+  border: 1px solid #f44336; 
+}
+
 .todo-edit-input {
   flex: 1;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   color: #333;
   padding: 4px 6px;
+  margin-right: 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
 }
 
 .todo-item-input {
-  width: 26px;
-  height: 26px;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
   accent-color: #42b983; // делает чекбокс зелёным
   cursor: pointer; 
 }
 
 .todo-item-text {
   flex: 1; 
-  font-size: 18px; 
+  font-size: 16px; 
   font-weight: 500; 
   color: #333; 
   word-break: break-word; 
@@ -217,6 +255,13 @@ export default {
     text-decoration: line-through;
     color: #aaa;
   }
+}
+
+.todo-settings {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  align-items: center;
 }
 
 .delete-btn {
@@ -238,17 +283,30 @@ export default {
   }
 }
 
-.todo-date {
-  font-size: 9px;
+.todo-date-wrapper {
+  margin-left: 38px;
+  margin-top: 4px;
+  font-size: 13px;
+  color: #666;
+  font-style: italic;
+  cursor: pointer;
+  user-select: none;
+}
+
+.todo-date-input {
+  font-size: 11px;
   padding: 2px 4px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  height: 20px;
-  width: 70px;         
-  margin-right: 4px;
+  width: 120px;
 }
 
 .edit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
   width: 26px;
   height: 26px;
   font-size: 16px;
@@ -260,11 +318,6 @@ export default {
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.2s ease;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
 
   &:hover {
     background-color: #eee;
@@ -278,10 +331,9 @@ export default {
 
 .priority-flag {
   width: 20px;
-  height: 24px;
+  height: 26px;
   position: relative;
   cursor: pointer;
-  margin-right: 8px;
   border-radius: 2px 2px 0 0; 
 }
 

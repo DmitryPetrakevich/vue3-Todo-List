@@ -65,6 +65,8 @@ export default {
 <style lang="less">
 .todo-list {
     height: 100vh;
+    margin-left: 10px;
+    margin-top: 30px;
     background-color: #f5f5f5;
 
     &__container {

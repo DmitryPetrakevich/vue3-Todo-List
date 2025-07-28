@@ -39,6 +39,7 @@ export default {
 <style lang="less">
 .add-todo {
   width: 600px;
+  margin-left: 10px;
   display: flex;
   background-color: #f5f5f5;
 }
