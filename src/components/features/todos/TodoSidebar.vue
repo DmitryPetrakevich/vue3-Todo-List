@@ -24,7 +24,7 @@ export default {
     return {
       tabs: [
         {id: 'todo', title: 'Todo-List'},
-        {id: 'habits', title: 'Habits'},
+        {id: 'pomodoro', title: 'Pomodoro'},
         {id: 'notes', title: 'Notes'},
       ]
     }

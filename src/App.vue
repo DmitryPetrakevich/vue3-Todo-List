@@ -1,4 +1,4 @@
-<template>
+<template >
   <PageHeader />
   <TodoSidebar 
     :active-tab="activeTab"
@@ -7,7 +7,7 @@
 
   <div class="main">
     <TodoManager v-if="activeTab === 'todo'" />
-    <HabitsView v-else-if="activeTab === 'habits'" />
+    <PomodoroView v-else-if="activeTab === 'pomodoro'" />
     <NotesView v-else-if="activeTab === 'notes'" />
   </div>
 </template>
@@ -16,7 +16,7 @@
 import PageHeader from '@/components/layout/PageHeader.vue'
 import TodoSidebar from './components/features/todos/TodoSidebar.vue'
 import TodoManager from './components/features/todos/TodoManager.vue'
-import HabitsView from './components/pages/HabitsView.vue'
+import PomodoroView from './components/pages/PomodoroView.vue'
 import NotesView from './components/pages/NotesView.vue'
 
 export default {
@@ -24,7 +24,7 @@ export default {
     PageHeader,
     TodoSidebar,
     TodoManager,
-    HabitsView,
+    PomodoroView,
     NotesView
   },
   data() {
