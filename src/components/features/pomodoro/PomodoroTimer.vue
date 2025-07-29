@@ -18,7 +18,7 @@
             r="140"
             cx="150"
             cy="150"
-            stroke="#4caf50"
+            :stroke="store.circleColor"
             stroke-width="20"
             fill="transparent"
             :stroke-dasharray="circumference"
@@ -35,18 +35,16 @@
         :class="{ dot: true, active: done }"
       >
       </span>
-    </div>
-        <div class="pomodoro-controls">
-            <button @click="store.start" :disabled="store.isRunning">Старт</button>
-            <button @click="store.pause" :disabled="!store.isRunning">Пауза</button>
-            <button @click="store.reset">Сброс</button>
-        </div>
+      </div>
+
+      <PomodoroControls />
     </div>
 </template>
 
 <script setup>
 import { computed } from 'vue';
 import { usePomodoroStore } from '@/stores/pomodoroStore';
+import PomodoroControls from './PomodoroControls.vue';
 
 const store = usePomodoroStore();
 
@@ -110,7 +108,6 @@ const progressOffset = computed(() => {
   font-weight: bold;
 }
 
-
 .pomodoro-timer {
   display: flex;
   flex-direction: column;
@@ -122,16 +119,5 @@ const progressOffset = computed(() => {
 .time-display {
   font-size: 4rem;
   font-weight: bold;
-}
-
-.controls {
-  display: flex;
-  gap: 15px;
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
 }
 </style>

@@ -11,14 +11,14 @@ export const usePomodoroStore = defineStore('pomodoro', {
         shortBreakDuration: 5 * 60,
         longBreakDuration: 15 * 60,
 
-        focusSessionsCount: 0, 
+        focusSessionsCount: 0,
 
         intervalId: null,
     }),
 
     actions: {
         start() {
-            if(this.isRunning) return;
+            if (this.isRunning) return;
             this.isRunning = true;
 
             this.intervalId = setInterval(() => {
@@ -39,7 +39,7 @@ export const usePomodoroStore = defineStore('pomodoro', {
         },
 
         tick() {
-            if(this.secondsLeft > 0) {
+            if (this.secondsLeft > 0) {
                 this.secondsLeft--;
             }
             else {
@@ -49,7 +49,7 @@ export const usePomodoroStore = defineStore('pomodoro', {
 
         switchMode(newMode) {
             this.mode = newMode;
-            switch(newMode) {
+            switch (newMode) {
                 case 'focus':
                     this.secondsLeft = this.focusDuration;
                     break;
@@ -65,10 +65,10 @@ export const usePomodoroStore = defineStore('pomodoro', {
         switchModeAutomatically() {
             this.pause();
 
-            if(this.mode === 'focus') {
+            if (this.mode === 'focus') {
                 this.focusSessionsCount++;
 
-                if(this.focusSessionsCount % 4 === 0) {
+                if (this.focusSessionsCount % 4 === 0) {
                     this.switchMode('longBreak');
                 }
                 else {
@@ -78,7 +78,6 @@ export const usePomodoroStore = defineStore('pomodoro', {
             else {
                 this.switchMode('focus');
             }
-
             this.start();
         }
     },
@@ -91,10 +90,22 @@ export const usePomodoroStore = defineStore('pomodoro', {
         },
 
         completedFocusDots: (state) => {
-        const total = 4; // до long break
-        const count = state.focusSessionsCount % total;
-        return Array.from({ length: total }, (_, i) => i < count);
-    }
+            const total = 4; // до long break
+            const count = state.focusSessionsCount % total;
+            return Array.from({ length: total }, (_, i) => i < count);
+        },
+
+        circleColor: (state) => {
+            switch (state.mode) {
+                case 'focus':
+                    return '#e53935';
+                case 'break':
+                case 'longBreak':
+                    return '#4caf50';
+                default:
+                    return '#4caf50'; 
+            }
+        }
     }
 })
 
