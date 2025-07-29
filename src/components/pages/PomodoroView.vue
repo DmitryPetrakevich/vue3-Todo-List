@@ -2,11 +2,8 @@
     <div class="pomodoro-page">
         <div class="pomodoro-page__container">
             <PomodoroTimer />
-            
         </div>
     </div>
-
-  
 </template>
 
 <script setup>
@@ -20,7 +17,7 @@ import PomodoroTimer from '../features/pomodoro/PomodoroTimer.vue';
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
   background-color: #f9f9f9;
 }
 </style>
