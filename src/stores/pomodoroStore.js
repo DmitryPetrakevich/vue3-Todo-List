@@ -101,7 +101,7 @@ export const usePomodoroStore = defineStore('pomodoro', {
                     this.secondsLeft = this.longBreakDuration;
                     break;
                 }
-                }
+            }
         }
     },
 

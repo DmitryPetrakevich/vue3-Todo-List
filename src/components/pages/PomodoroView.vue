@@ -13,11 +13,9 @@ import PomodoroTimer from '../features/pomodoro/PomodoroTimer.vue';
 
 <style scoped lang="less">
 .pomodoro-page {
-  padding: 40px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 80px);
+  padding: 0 40px;
+  height: calc(100vh - 80px);
   background-color: #f9f9f9;
 }
 </style>

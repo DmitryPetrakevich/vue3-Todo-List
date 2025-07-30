@@ -1,7 +1,9 @@
 <template>
     <div class="pomodoro-timer">
       <PomodoroSettings />
-      <h2>{{ store.mode === 'focus' ? 'Фокус' : store.mode === 'break' ? 'Перерыв' : 'Длинный перерыв'  }}</h2>
+      <h2 class="pomodoro-timer-mode">
+        {{ store.mode === 'focus' ? 'Фокус' : store.mode === 'break' ? 'Перерыв' : 'Длинный перерыв'  }}
+      </h2>
         
         <div class="circle-wrapper">
         <svg width="300" height="300" class="progress-ring">
@@ -75,6 +77,10 @@ const progressOffset = computed(() => {
 </script>
 
 <style scoped lang="less">
+.pomodoro-timer-mode {
+  font-size: 40px;;
+}
+
 .focus-dots {
   display: flex;
   gap: 10px;
@@ -117,7 +123,8 @@ const progressOffset = computed(() => {
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  margin-top: 50px;
+  position: absolute;
+  left: 40%;
 }
 
 .time-display {
