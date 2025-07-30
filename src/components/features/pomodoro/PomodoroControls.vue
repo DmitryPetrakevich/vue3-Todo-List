@@ -3,7 +3,7 @@
 
 
         <svg fill="currentColor" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-            class="pomodoro-controls-btn" @click="store.start" :class="{ disabled: store.isRunning }"
+            class="pomodoro-controls-btn" @click="store.pause" :class="{ disabled: !store.isRunning }"
             xmlns:xlink="http://www.w3.org/1999/xlink" width="60px" height="60px" viewBox="0 0 512 512"
             enable-background="new 0 0 512 512" xml:space="preserve">
             <g>
@@ -17,7 +17,7 @@
         </svg>
 
         <svg fill="currentColor" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-            class="pomodoro-controls-btn" @click="store.pause" :class="{ disabled: !store.isRunning }"
+            class="pomodoro-controls-btn" @click="store.start" :class="{ disabled: store.isRunning }"
             xmlns:xlink="http://www.w3.org/1999/xlink" width="60px" height="60px" viewBox="0 0 46 46"
             xml:space="preserve">
             <g>

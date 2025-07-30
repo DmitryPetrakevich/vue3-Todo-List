@@ -12,6 +12,7 @@ export const usePomodoroStore = defineStore('pomodoro', {
         longBreakDuration: 15 * 60,
 
         focusSessionsCount: 0,
+        sessionsBeforeLongBreak: 4,
 
         intervalId: null,
     }),
@@ -68,7 +69,7 @@ export const usePomodoroStore = defineStore('pomodoro', {
             if (this.mode === 'focus') {
                 this.focusSessionsCount++;
 
-                if (this.focusSessionsCount % 4 === 0) {
+                if (this.focusSessionsCount % this.sessionsBeforeLongBreak === 0) {
                     this.switchMode('longBreak');
                 }
                 else {
@@ -79,6 +80,28 @@ export const usePomodoroStore = defineStore('pomodoro', {
                 this.switchMode('focus');
             }
             this.start();
+        },
+
+        updateSettings(newSettings) {
+            this.focusDuration = newSettings.focusDuration * 60;
+            this.shortBreakDuration = newSettings.shortBreakDuration * 60;
+            this.longBreakDuration = newSettings.longBreakDuration * 60;
+            this.sessionsBeforeLongBreak = newSettings.sessionsBeforeLongBreak;
+
+             if (!this.isRunning) {
+    
+                switch (this.mode) {
+                    case 'focus':
+                    this.secondsLeft = this.focusDuration;
+                    break;
+                    case 'break':
+                    this.secondsLeft = this.shortBreakDuration;
+                    break;
+                    case 'longBreak':
+                    this.secondsLeft = this.longBreakDuration;
+                    break;
+                }
+                }
         }
     },
 
@@ -90,7 +113,7 @@ export const usePomodoroStore = defineStore('pomodoro', {
         },
 
         completedFocusDots: (state) => {
-            const total = 4; // до long break
+            const total = state.sessionsBeforeLongBreak; // до long break
             const count = state.focusSessionsCount % total;
             return Array.from({ length: total }, (_, i) => i < count);
         },

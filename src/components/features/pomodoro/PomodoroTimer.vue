@@ -1,8 +1,9 @@
 <template>
     <div class="pomodoro-timer">
-        <h2>{{ store.mode === 'focus' ? 'Фокус' : store.mode === 'break' ? 'Перерыв' : 'Длинный перерыв'  }}</h2>
-
-      <div class="circle-wrapper">
+      <PomodoroSettings />
+      <h2>{{ store.mode === 'focus' ? 'Фокус' : store.mode === 'break' ? 'Перерыв' : 'Длинный перерыв'  }}</h2>
+        
+        <div class="circle-wrapper">
         <svg width="300" height="300" class="progress-ring">
           <circle
             class="progress-ring__background"
@@ -38,6 +39,8 @@
       </div>
 
       <PomodoroControls />
+      
+      
     </div>
 </template>
 
@@ -45,6 +48,7 @@
 import { computed } from 'vue';
 import { usePomodoroStore } from '@/stores/pomodoroStore';
 import PomodoroControls from './PomodoroControls.vue';
+import PomodoroSettings from './PomodoroSettings.vue';
 
 const store = usePomodoroStore();
 
