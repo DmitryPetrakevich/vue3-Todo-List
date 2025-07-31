@@ -1,17 +1,13 @@
-!<template>
+!
+<template>
   <div class="add-todo">
-    <div class="add-todo__container"> 
-        <input
-        v-model="text" 
-        class="add-todo-input" 
+    <div class="add-todo__container">
+      <input
+        v-model="text"
+        class="add-todo-input"
         placeholder="Добавить задачу..."
-        />
-        <button
-        type="submit" 
-        class="add-todo-btn"
-        @click="submitTodo"
-        >
-        +</button>
+      />
+      <button type="submit" class="add-todo-btn" @click="submitTodo">+</button>
     </div>
   </div>
 </template>
@@ -21,18 +17,18 @@ export default {
   data() {
     return {
       text: "",
-    }
+    };
   },
 
   methods: {
     submitTodo() {
       let trimed = this.text.trim();
-      if(trimed != "") {
-        this.$emit('add-todo', trimed)
+      if (trimed != "") {
+        this.$emit("add-todo", trimed);
         this.text = "";
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -45,20 +41,20 @@ export default {
 }
 
 .add-todo__container {
-  display: flex; 
+  display: flex;
   align-items: center;
-  gap: 10px; 
-  max-width: 600px; 
+  gap: 10px;
+  max-width: 600px;
   width: 100%;
   padding: 12px 16px;
-  border: 1px solid #ddd; 
+  border: 1px solid #ddd;
   border-radius: 8px;
-  background-color: #f9f9f9; 
+  background-color: #f9f9f9;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .add-todo-input {
-  flex: 1; 
+  flex: 1;
   padding: 8px 12px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -66,7 +62,7 @@ export default {
   outline: none;
 
   &:focus {
-    border-color: #42b983; 
+    border-color: #42b983;
     box-shadow: 0 0 0 2px rgba(66, 185, 131, 0.2);
   }
 }

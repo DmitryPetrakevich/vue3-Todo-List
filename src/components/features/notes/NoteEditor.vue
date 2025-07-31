@@ -1,27 +1,20 @@
-!<template>
+!
+<template>
   <div class="note-editor">
     <div class="note-editor__container">
-        <textarea
-        v-model="localText"
-        >
-            
-        </textarea>
-
+      <textarea v-model="localText"> </textarea>
     </div>
-
   </div>
 </template>
 
 <script>
 export default {
-  props: [
-    'note',
-  ],
+  props: ["note"],
 
   data() {
     return {
-      localText: ""
-    }
+      localText: "",
+    };
   },
 
   watch: {
@@ -30,15 +23,14 @@ export default {
     },
     localText(newVal) {
       this.note.text = newVal;
-    }
+    },
   },
 
   created() {
-    if(this.note) {
+    if (this.note) {
       this.localText = this.note.text;
     }
-  }
-  
+  },
 };
 </script>
 

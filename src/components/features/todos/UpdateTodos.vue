@@ -32,7 +32,9 @@ export default {};
   top: 5px;
   margin-left: 10px;
   cursor: pointer;
-  transition: color 0.3s ease, transform 0.3s ease;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
 
   &:hover {
     color: rgb(187, 0, 0);

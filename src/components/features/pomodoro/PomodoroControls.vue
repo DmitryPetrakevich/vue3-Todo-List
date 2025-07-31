@@ -1,7 +1,5 @@
 <template>
     <div class="pomodoro-controls">
-
-
         <svg fill="currentColor" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
             class="pomodoro-controls-btn" @click="store.pause" :class="{ disabled: !store.isRunning }"
             xmlns:xlink="http://www.w3.org/1999/xlink" width="60px" height="60px" viewBox="0 0 512 512"

@@ -1,11 +1,12 @@
-!<template>
+!
+<template>
   <div class="todo-list">
     <transition-group
-    name="todo-animation" 
-    tag="div"
-    class="todo-list__container"
+      name="todo-animation"
+      tag="div"
+      class="todo-list__container"
     >
-        <TodoItem 
+      <TodoItem
         v-for="todo in todos"
         :key="todo.id"
         :todo="todo"
@@ -14,97 +15,98 @@
         @edit-todo="handleEditTodo"
         @update-priority="handleUpdatePriority"
         @update-date="todoStore.updateDate"
-        /> 
+      />
 
-        <div v-if="todos.length === 0" class="no-todos">
-        <p> Тут пока нет задач </p>
-        </div>
+      <div
+        v-if="todos.length === 0"
+        class="no-todos"
+      >
+        <p>Тут пока нет задач</p>
+      </div>
     </transition-group>
   </div>
 </template>
 
 <script>
-import { useTodoStore } from '@/stores/todoStore';
-import TodoItem from '../features/todos/TodoItem.vue';
+  import { useTodoStore } from "@/stores/todoStore";
+  import TodoItem from "../features/todos/TodoItem.vue";
 
-export default {
+  export default {
     components: {
-        TodoItem,
+      TodoItem,
     },
 
-    props: [
-        'todos',
-    ],
+    props: ["todos"],
 
     data() {
-        return {
-           todoStore: useTodoStore()
-        }
+      return {
+        todoStore: useTodoStore(),
+      };
     },
 
     methods: {
-        toggleCompleted(todoId) {
-            this.$emit('toggle-completed', todoId); 
-        },
+      toggleCompleted(todoId) {
+        this.$emit("toggle-completed", todoId);
+      },
 
-        handleDeleteTodo(todoId) {
-            this.$emit('delete-todo', todoId);
-        },
+      handleDeleteTodo(todoId) {
+        this.$emit("delete-todo", todoId);
+      },
 
-        handleEditTodo(payload) {
-            this.$emit('edit-todo', payload);
-        },
+      handleEditTodo(payload) {
+        this.$emit("edit-todo", payload);
+      },
 
-        handleUpdatePriority({id, priority}) {
-          this.$emit('update-priority', {id, priority})
-        }
-    }
-};
+      handleUpdatePriority({ id, priority }) {
+        this.$emit("update-priority", { id, priority });
+      },
+    },
+  };
 </script>
 
 <style lang="less">
-.todo-list {
+  .todo-list {
     height: 100vh;
     margin-left: 10px;
     margin-top: 30px;
     background-color: #f5f5f5;
 
     &__container {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
     }
   }
 
-.no-todos {
-  margin-left: 240px;
-  margin-top: 20px;
-  color: #ef0000;
-  font-style: italic;
-  font-size: 20px;
-}
+  .no-todos {
+    margin-left: 240px;
+    margin-top: 20px;
+    color: #ef0000;
+    font-style: italic;
+    font-size: 20px;
+  }
 
-.todo-animation-enter-from {
-  opacity: 0;
-  transform: translateY(-20px);
-}
-.todo-animation-enter-active {
-  transition: all 0.3s ease-out; 
-}
+  .todo-animation-enter-from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  .todo-animation-enter-active {
+    transition: all 0.3s ease-out;
+  }
 
-.todo-animation-leave-to {
-  opacity: 0;
-  transform: translateX(50px); 
-}
+  .todo-animation-leave-to {
+    opacity: 0;
+    transform: translateX(50px);
+  }
 
-.todo-animation-leave-active {
-  position: absolute; // Чтобы соседние элементы плавно сдвигались 
-  width: 100%;
-  transition: all 0.4s ease-in;
-}
+  .todo-animation-leave-active {
+    position: absolute; // Чтобы соседние элементы плавно сдвигались
+    width: 100%;
+    transition: all 0.4s ease-in;
+  }
 
-// Анимация ПЕРЕМЕЩЕНИЯ (на будущее) 
-.todo-animation-move {
-  transition: transform 0.5s ease;
-}
+  // Анимация ПЕРЕМЕЩЕНИЯ (на будущее)
+  .todo-animation-move {
+    transition: transform 0.5s ease;
+  }
 </style>

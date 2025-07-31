@@ -1,14 +1,13 @@
-!<template>
-    <div class="pomodoro-page">
-        <div class="pomodoro-page__container">
-            <PomodoroTimer />
-        </div>
+<template>
+  <div class="pomodoro-page">
+    <div class="pomodoro-page__container">
+      <PomodoroTimer />
     </div>
+  </div>
 </template>
 
 <script setup>
-import PomodoroTimer from '../features/pomodoro/PomodoroTimer.vue';
-
+import PomodoroTimer from "../features/pomodoro/PomodoroTimer.vue";
 </script>
 
 <style scoped lang="less">
