@@ -37,6 +37,12 @@ export const usePomodoroStore = defineStore("pomodoro", {
       this.pause();
       this.secondsLeft = this.focusDuration;
       this.mode = "focus";
+      this.focusSessionsCount = 0;
+    },
+
+    updateTimer() {
+      this.pause();
+      this.secondsLeft = this.focusDuration;     
     },
 
     tick() {
@@ -106,12 +112,6 @@ export const usePomodoroStore = defineStore("pomodoro", {
       const minutes = Math.floor(state.secondsLeft / 60);
       const seconds = state.secondsLeft % 60;
       return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-    },
-
-    completedFocusDots: (state) => {
-      const total = state.sessionsBeforeLongBreak; // до long break
-      const count = state.focusSessionsCount % total;
-      return Array.from({ length: total }, (_, i) => i < count);
     },
 
     circleColor: (state) => {

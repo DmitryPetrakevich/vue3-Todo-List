@@ -42,15 +42,13 @@
 
       <div class="focus-dots">
       <span
-        v-for="(done, index) in store.completedFocusDots"
+        v-for="(done, index) in completedFocusDots"
         :key="index"
         :class="{ dot: true, active: done }"
       >
       </span>
     </div>
     </div>
-
-
 
     <PomodoroControls />
   </div>
@@ -83,7 +81,16 @@
 
     const progress = store.secondsLeft / duration;
     return circumference * (1 - progress);
-  });
+  })
+
+  const completedFocusDots = computed(() => {
+    const total = store.sessionsBeforeLongBreak; // до long break
+    const count = store.focusSessionsCount % total;
+    return Array.from({ length: total }, (_, i) => i < count);
+  })
+
+
+
 </script>
 
 <style scoped lang="less">

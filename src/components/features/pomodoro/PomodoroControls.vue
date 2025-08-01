@@ -1,5 +1,13 @@
 <template>
     <div class="pomodoro-controls">
+        <span 
+        class="pomodoro-controls-reset-timer"
+        @click="store.updateTimer"
+        >
+            ◉ Обновить таймер
+        </span>
+
+        <div class="pomodoro-controls__container">
         <svg fill="currentColor" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
             class="pomodoro-controls-btn" @click="store.pause" :class="{ disabled: !store.isRunning }"
             xmlns:xlink="http://www.w3.org/1999/xlink" width="60px" height="60px" viewBox="0 0 512 512"
@@ -37,19 +45,37 @@
                 fill-rule="evenodd" />
         </svg>
     </div>
+</div>    
 </template>
 
 <script setup>
 import { usePomodoroStore } from '@/stores/pomodoroStore';
 
 const store = usePomodoroStore();
-
 </script>
 
 <style scoped lang="less">
 .pomodoro-controls {
     display: flex;
+    flex-direction: column;
     gap: 30px;
+
+}
+
+.pomodoro-controls__container {
+    display: flex;
+    gap: 30px;
+}
+
+.pomodoro-controls-reset-timer {
+    text-align: center;
+    font-size: 15px;
+    color: grey;
+    transition: all 0.3s ease;
+
+    &:hover {
+        color: red;
+    }
 }
 
 .pomodoro-controls-btn {
