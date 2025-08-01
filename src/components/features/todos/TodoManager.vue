@@ -1,38 +1,30 @@
 <template>
   <div>
     <div class="add-todo-section">
-      <AddTodo @add-todo="todoStore.addTodo" />
+      <AddTodo @add-todo="addTodo" />
       <DeleteAllTodos @delete-todos="showDeleteWindow = true" />
-      <TodosFilter @sort="todoStore.sortTodos" />
-      <UpdateTodos @update-todos="todoStore.updateTodos" />
+      <TodosFilter @sort="sortTodos" />
+      <UpdateTodos @update-todos="updateTodos" />
 
       <DeleteAllTodosWindow
         v-if="showDeleteWindow"
         @cancel="showDeleteWindow = false"
-        @confirm="
-          () => {
-            todoStore.deleteAllTodos();
-            showDeleteWindow = false;
-          }
-        "
+        @confirm="confirmDeleteAll"
       />
     </div>
 
     <TodoView
       :todos="todos"
-      @toggle-completed="(id) => todoStore.toggleCompleted(id)"
-      @delete-todo="(id) => todoStore.deleteTodo(id)"
-      @edit-todo="(payload) => todoStore.editTodo(payload)"
-      @update-priority="(payload) => todoStore.updatePriority(payload)"
+      @toggle-completed="toggleCompleted"
+      @delete-todo="deleteTodo"
+      @edit-todo="editTodo"
+      @update-priority="updatePriority"
     />
   </div>
 </template>
 
 <script>
 import { useTodoStore } from "@/stores/todoStore";
-import { storeToRefs } from "pinia";
-import { ref } from "vue";
-
 import AddTodo from "./AddTodo.vue";
 import DeleteAllTodosWindow from "./DeleteAllTodosWindow.vue";
 import DeleteAllTodos from "./DeleteAllTodos.vue";
@@ -41,6 +33,8 @@ import UpdateTodos from "./UpdateTodos.vue";
 import TodoView from "@/components/pages/TodoView.vue";
 
 export default {
+  name: "TodoManager",
+
   components: {
     AddTodo,
     DeleteAllTodos,
@@ -49,17 +43,60 @@ export default {
     UpdateTodos,
     TodoView,
   },
-  setup() {
-    const todoStore = useTodoStore();
-    const { todos } = storeToRefs(todoStore);
 
+  data() {
     return {
-      todos,
-      todoStore,
-      showDeleteWindow: ref(false),
+      showDeleteWindow: false,
     };
+  },
+
+  computed: {
+    todos() {
+      return this.todoStore.todos;
+    },
+  },
+
+  created() {
+    this.todoStore = useTodoStore();
+  },
+
+  methods: {
+    addTodo(todoText) {
+      this.todoStore.addTodo(todoText);
+    },
+
+    sortTodos(criteria) {
+      this.todoStore.sortTodos(criteria);
+    },
+
+    updateTodos() {
+      this.todoStore.updateTodos();
+    },
+
+    toggleCompleted(id) {
+      this.todoStore.toggleCompleted(id);
+    },
+
+    deleteTodo(id) {
+      this.todoStore.deleteTodo(id);
+    },
+
+    editTodo(payload) {
+      this.todoStore.editTodo(payload);
+    },
+
+    updatePriority(payload) {
+      this.todoStore.updatePriority(payload);
+    },
+
+    confirmDeleteAll() {
+      this.todoStore.deleteAllTodos();
+      this.showDeleteWindow = false;
+    },
   },
 };
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+
+</style>

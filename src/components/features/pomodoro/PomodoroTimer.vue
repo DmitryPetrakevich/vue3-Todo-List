@@ -89,22 +89,13 @@
     font-size: 40px;
   }
 
-  .focus-dots {
+  .pomodoro-timer {
     display: flex;
-    gap: 10px;
-    margin-top: 10px;
-  }
-
-  .dot {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background-color: #ccc;
-    transition: background-color 0.3s;
-  }
-
-  .dot.active {
-    background-color: #4caf50;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: absolute;
+    left: 40%;
   }
 
   .circle-wrapper {
@@ -122,21 +113,25 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 2.5rem;
-    font-weight: bold;
-  }
-
-  .pomodoro-timer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    position: absolute;
-    left: 40%;
-  }
-
-  .time-display {
     font-size: 4rem;
     font-weight: bold;
+  }
+
+  .focus-dots {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #ccc;
+    transition: background-color 0.3s;
+  }
+
+  .dot.active {
+    background-color: #4caf50;
   }
 </style>
