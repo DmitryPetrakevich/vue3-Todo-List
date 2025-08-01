@@ -39,9 +39,8 @@
         />
       </svg>
       <div class="time-display">{{ store.formattedTime }}</div>
-    </div>
 
-    <div class="focus-dots">
+      <div class="focus-dots">
       <span
         v-for="(done, index) in store.completedFocusDots"
         :key="index"
@@ -49,6 +48,9 @@
       >
       </span>
     </div>
+    </div>
+
+
 
     <PomodoroControls />
   </div>
@@ -119,8 +121,11 @@
 
   .focus-dots {
     display: flex;
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translateX(-50%);
     gap: 10px;
-    margin-top: 10px;
   }
 
   .dot {
