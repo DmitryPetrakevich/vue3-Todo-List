@@ -50,17 +50,29 @@
     </div>
     </div>
 
-    <PomodoroControls />
+    <PomodoroControls 
+    @show-reset-model="showResetWindow = true"
+    />
+
+    <ResetConfirmModal 
+    v-if="showResetWindow"
+    @noReset="showResetWindow = false"
+    @yesReset="closeResetModel"
+    />
+
   </div>
 </template>
 
 <script setup>
-  import { computed } from "vue";
+  import { ref, computed } from "vue";
   import { usePomodoroStore } from "@/stores/pomodoroStore";
   import PomodoroControls from "./PomodoroControls.vue";
   import PomodoroSettings from "./PomodoroSettings.vue";
+  import ResetConfirmModal from "./ResetConfirmModal.vue";
 
   const store = usePomodoroStore();
+
+  const showResetWindow = ref(false);
 
   const radius = 140;
   const circumference = 2 * Math.PI * radius;
@@ -89,8 +101,11 @@
     return Array.from({ length: total }, (_, i) => i < count);
   })
 
+  function closeResetModel() {
+    store.reset();
+    showResetWindow.value = false;
 
-
+  }
 </script>
 
 <style scoped lang="less">
