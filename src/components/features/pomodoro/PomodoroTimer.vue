@@ -82,6 +82,7 @@
     switch (store.mode) {
       case "focus":
         duration = store.focusDuration;
+        playSound("focus2.mp3")
         break;
       case "break":
         duration = store.shortBreakDuration;
@@ -106,6 +107,12 @@
     showResetWindow.value = false;
 
   }
+    function playSound(filename) {
+      const audio = new Audio(`/sounds/${filename}`);
+      audio.play();
+  }
+
+ 
 </script>
 
 <style scoped lang="less">

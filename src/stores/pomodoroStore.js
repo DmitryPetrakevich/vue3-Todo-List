@@ -1,5 +1,9 @@
 import { defineStore } from "pinia";
 
+import focusSound from '@/assets/sounds/focus.mp3';
+import breakSound from '@/assets/sounds/break.mp3';
+import longBreakSound from '@/assets/sounds/longBreak.mp3';
+
 export const usePomodoroStore = defineStore("pomodoro", {
   state: () => ({
     mode: "focus", // focus | break | longbreak
@@ -76,11 +80,16 @@ export const usePomodoroStore = defineStore("pomodoro", {
 
         if (this.focusSessionsCount % this.sessionsBeforeLongBreak === 0) {
           this.switchMode("longBreak");
-        } else {
+          this.playSound('longBreak.mp3');
+        } 
+        else {
           this.switchMode("break");
+          this.playSound('break.mp3');
         }
-      } else {
+      } 
+      else {
         this.switchMode("focus");
+        this.playSound('focus.mp3');
       }
       this.start();
     },
@@ -105,7 +114,35 @@ export const usePomodoroStore = defineStore("pomodoro", {
         }
       }
     },
-  },
+
+  //   playSound(filename) {
+  //     console.log("Hello")
+  //     const audio = new Audio(`/sounds/${filename}`);
+  //     audio.play();
+  // }
+
+    playSound(filename) {
+        let audioSrc;
+        
+        switch(filename) {
+          case 'focus.mp3':
+            audioSrc = focusSound;
+            break;
+          case 'break.mp3':
+            audioSrc = breakSound;
+            break;
+          case 'longBreak.mp3':
+            audioSrc = longBreakSound;
+            break;
+          default:
+            console.error('Unknown sound file:', filename);
+            return;
+        }
+
+        const audio = new Audio(audioSrc);
+        audio.play()
+    }  
+},
 
   getters: {
     formattedTime: (state) => {
