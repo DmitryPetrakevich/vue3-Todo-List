@@ -1,4 +1,3 @@
-!
 <template>
   <div class="notes-sidebar">
     <div class="notes-sidebar__container">
@@ -6,26 +5,39 @@
         class="notes-sidebar-btn"
         v-for="note in notes"
         :key="note.id"
-        @click="$emit('changeNote', note.id)"
+        @click="emit('changeNote', note.id)"
         :class="{ active: note.id === activeNoteId }"
       >
         {{ note.title }}
       </button>
     </div>
+
+    <NewNoteButton />
+    
   </div>
 </template>
 
-<script>
-export default {
-  props: ["notes", "activeNoteId"],
+<script setup>
+import { defineProps, defineEmits } from 'vue';
+import NewNoteButton from './NewNoteButton.vue';
 
-  data() {
-    return {};
+
+const props = defineProps({
+  notes: {
+    type: Array,
+    required: true
   },
-};
+
+  activeNoteId: {
+    type: [String, Number],
+    required: true
+  }
+});
+
+const emit = defineEmits(['changeNote']);
 </script>
 
-<style lang="less">
+<style scoped lang="less">
 .notes-sidebar {
   position: fixed;
   right: 0;
@@ -60,7 +72,7 @@ export default {
     transition: background-color 0.3s ease;
 
     &.active {
-      background-color: #95ceff; // Активная заметка — синяя
+      background-color: #95ceff; 
     }
 
     &:hover {

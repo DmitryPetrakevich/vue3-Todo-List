@@ -1,46 +1,58 @@
-!
 <template>
   <div class="note-editor">
     <div class="note-editor__container">
-      <textarea v-model="localText"> </textarea>
+      <textarea 
+      class="no-resize"
+      v-model="localText"
+      > 
+      </textarea>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  props: ["note"],
+<script setup>
+import { ref, watch, onMounted } from 'vue';
 
-  data() {
-    return {
-      localText: "",
-    };
-  },
+const props = defineProps ({
+  note: {
+    type: Array,
+    required: true
 
-  watch: {
-    note(newNote) {
-      this.localText = newNote.text;
-    },
-    localText(newVal) {
-      this.note.text = newVal;
-    },
-  },
+  }
+});
 
-  created() {
-    if (this.note) {
-      this.localText = this.note.text;
+const localText = ref("");
+
+onMounted(() => {
+  if(props.note) {
+    localText.value = props.note.text;
+  }
+});
+
+watch(
+  () => props.note,
+  (newNote) => {
+    if (newNote) {
+      localText.value = newNote.text;
     }
   },
-};
+  { immediate: true } // сразу запустить при первом рендере
+);
+
+watch(localText, (newVal) => {
+  if (props.note) {
+    props.note.text = newVal;
+  }
+});
 </script>
 
 <style lang="less">
 .note-editor {
   padding: 20px;
-  background-color: #fdfdfd; /* Мягкий фон */
+  background-color: #fdfdfd; 
 
   display: flex;
-  align-items: flex-start; /* Прижать к верху */
+  align-items: flex-start; 
 }
 
 .note-editor__container {
@@ -48,18 +60,18 @@ export default {
 }
 
 textarea {
-  width: 100%; /* Растянуть на всю ширину */
-  height: calc(100vh - 150px); /* Достаточная высота */
-  padding: 12px 16px; /* Внутренние отступы */
+  width: 100%; 
+  height: calc(100vh - 150px); 
+  padding: 12px 16px; 
   font-size: 16px;
   font-family: sans-serif;
   line-height: 1.6;
 
   border: 1px solid #ccc;
-  border-radius: 10px; /* Скругление углов */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Мягкая тень */
+  border-radius: 10px; 
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); 
 
-  resize: vertical; /* Пользователь может менять высоту */
+  resize: vertical; 
   background-color: #fff;
   color: #333;
 
@@ -68,6 +80,10 @@ textarea {
 
 textarea:focus {
   outline: none;
-  border-color: #007bff; /* Синяя рамка при фокусе */
+  border-color: #007bff; 
+}
+
+.no-resize {
+  resize: none;
 }
 </style>
