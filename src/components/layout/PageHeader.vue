@@ -59,7 +59,7 @@ export default {};
 
   &__logo-img {
     display: block;
-    height: 100px;
+    height: 80px;
     width: auto;
     object-fit: contain;
   }

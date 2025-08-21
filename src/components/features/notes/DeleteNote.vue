@@ -7,7 +7,6 @@
             Удалить 
         </button>
     </div>
-
 </template>
 
 <script setup>
@@ -26,15 +25,15 @@ function deelteActiveNote() {
 <style scoped lang="less">
 .delete-note-btn {
     display: block;
-    width: 200px;
+    width: 230px;
     font-size: 16px;
     font-weight: 500;
     margin-top: 10px;
     margin-bottom: 5px;
     border: 1px solid darkgreen;
     border-radius: 5px;
-    color: black;
-    background-color: #c7c7c7;
+    color: #2d2d2d;
+    background-color: 	#e8c6c0;
     padding: 6px 0;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -44,7 +43,7 @@ function deelteActiveNote() {
     }
 
     &:hover {
-      background-color: #7c7c7c;
+      background-color: #dcb4ac;
     }
 
     &:active {

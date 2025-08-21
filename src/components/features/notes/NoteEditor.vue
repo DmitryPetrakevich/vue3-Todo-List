@@ -34,9 +34,16 @@ textarea {
   font-size: 16px;
   font-family: sans-serif;
   line-height: 1.6;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   border-radius: 10px;
   resize: none;
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: rgb(205, 233, 235);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  }
 }
 .note-editor-empty {
   padding: 20px;

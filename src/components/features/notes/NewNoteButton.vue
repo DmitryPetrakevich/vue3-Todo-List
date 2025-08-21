@@ -38,8 +38,8 @@ function addNewNote() {
 
 .new-note-input {
   flex: 1;
-  font-size: 16px;
-  padding: 6px 10px;
+  font-size: 14px;
+  padding: 8px 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-right: 8px;
@@ -51,17 +51,17 @@ function addNewNote() {
   padding: 6px 12px;
   border: 1px solid darkgreen;
   border-radius: 5px;
-  background-color: #a9a9a9;
+  background-color: #8dbc9a;
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #5e5e5e;
+    background-color: #7cb08c;
   }
 
   &:active {
-    background-color: #4f9ee2;
+    background-color: #74a282;
   }
 }
 </style>
