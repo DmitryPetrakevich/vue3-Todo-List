@@ -2,6 +2,7 @@
   <div class="notes-sidebar">
     <div class="notes-sidebar__container">
       <NewNoteButton />
+      <DeleteNote />
       <button
         class="notes-sidebar-btn"
         v-for="note in store.notes"
@@ -18,6 +19,7 @@
 <script setup>
 import { useNoteStore } from "@/stores/note";
 import NewNoteButton from "./NewNoteButton.vue";
+import DeleteNote from "./DeleteNote.vue";
 
 const store = useNoteStore();
 </script>

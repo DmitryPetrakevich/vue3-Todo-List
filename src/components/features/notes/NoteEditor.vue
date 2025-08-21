@@ -1,6 +1,10 @@
 <template>
   <div class="note-editor" v-if="activeNote">
-    <textarea v-model="activeNote.text" class="no-resize"></textarea>
+    <textarea 
+    v-model="activeNote.text" 
+    @input="store.updateNote(activeNote.id, activeNote.text)"
+    class="no-resize">
+    </textarea>
   </div>
   <div v-else class="note-editor-empty">
     Выберите заметку или создайте новую

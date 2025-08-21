@@ -19,11 +19,10 @@ import { useNoteStore } from "@/stores/note";
 const store = useNoteStore();
 const noteTitle = ref("");
 
-// добавление новой заметки
 function addNewNote() {
   if (noteTitle.value.trim()) {
     store.addNote(noteTitle.value.trim());
-    noteTitle.value = ""; // очищаем поле ввода
+    noteTitle.value = ""; 
   }
 }
 </script>
