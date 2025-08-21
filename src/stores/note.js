@@ -1,20 +1,20 @@
 import { defineStore } from "pinia";
 
-export const useNoteStore =  defineStore("note", {
-    state: () => ({
-        notes: [],
-        
+export const useNoteStore = defineStore("note", {
+  state: () => ({
+    notes: [], 
+    activeNoteId: null, 
+  }),
 
-
-
-    }),
-
-    actions: {
-        addNote(title) {
-            this.notes.push({
-                title,
-            })
-        }
-    }
-
-})
+  actions: {
+    addNote(title) {
+      const newNote = {
+        id: Date.now(), 
+        title: title || "Новая заметка",
+        text: "",
+      };
+      this.notes.push(newNote);
+      this.activeNoteId = newNote.id; 
+    },
+  },
+});

@@ -1,40 +1,25 @@
 <template>
   <div class="notes-sidebar">
     <div class="notes-sidebar__container">
+      <NewNoteButton />
       <button
         class="notes-sidebar-btn"
-        v-for="note in notes"
+        v-for="note in store.notes"
         :key="note.id"
-        @click="emit('changeNote', note.id)"
-        :class="{ active: note.id === activeNoteId }"
+        @click="store.activeNoteId = note.id"
+        :class="{ active: note.id === store.activeNoteId }"
       >
         {{ note.title }}
       </button>
     </div>
-
-    <NewNoteButton />
-    
   </div>
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from 'vue';
-import NewNoteButton from './NewNoteButton.vue';
+import { useNoteStore } from "@/stores/note";
+import NewNoteButton from "./NewNoteButton.vue";
 
-
-const props = defineProps({
-  notes: {
-    type: Array,
-    required: true
-  },
-
-  activeNoteId: {
-    type: [String, Number],
-    required: true
-  }
-});
-
-const emit = defineEmits(['changeNote']);
+const store = useNoteStore();
 </script>
 
 <style scoped lang="less">
@@ -57,7 +42,6 @@ const emit = defineEmits(['changeNote']);
 
   &-btn {
     display: block;
-    box-sizing: border-box;
     width: 80%;
     font-size: 16px;
     font-weight: 500;
@@ -72,7 +56,7 @@ const emit = defineEmits(['changeNote']);
     transition: background-color 0.3s ease;
 
     &.active {
-      background-color: #95ceff; 
+      background-color: #95ceff;
     }
 
     &:hover {
