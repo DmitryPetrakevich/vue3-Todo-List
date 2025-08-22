@@ -4,6 +4,7 @@
     </div>
 
     <div class="editor">
+        
         <NoteEditor />
     </div>
 </template>

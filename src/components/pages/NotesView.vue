@@ -14,5 +14,7 @@ import NotesSidebar from "../features/notes/NotesSidebar.vue";
 .notes-view {
   display: flex;
   flex-direction: row;
+  height: calc(100vh - 80px);
+  background-color: #f9f9f9;
 }
 </style>

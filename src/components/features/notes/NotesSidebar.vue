@@ -2,7 +2,7 @@
   <div class="notes-sidebar">
     <div class="notes-sidebar__container">
       <NewNoteButton />
-      <DeleteNote />
+      <DeleteNote v-if="store.notes.length > 0" />
       <button
         class="notes-sidebar-btn"
         v-for="note in store.notes"
@@ -53,7 +53,7 @@ const store = useNoteStore();
     border-radius: 5px;
     color: #2d2d2d;
     background-color: #8dbc9a;
-    padding: 6px 0;
+    padding: 4px 0;
     cursor: pointer;
     transition: background-color 0.3s ease;
 
