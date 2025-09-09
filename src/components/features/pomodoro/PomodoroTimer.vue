@@ -82,7 +82,6 @@
     switch (store.mode) {
       case "focus":
         duration = store.focusDuration;
-        playSound("focus2.mp3")
         break;
       case "break":
         duration = store.shortBreakDuration;

@@ -18,6 +18,7 @@ function format(command) {
 <style scoped lang="less">
 .settings-note {
   padding-left: 20px;
+  margin-top: 10px;
 }
 
 .settings-panel {
@@ -31,7 +32,7 @@ function format(command) {
 .settings-item {
   flex: 1;
   padding: 8px 16px;
-  font-size: 20px;
+  font-size: 16px;
   font-family: monospace;
   color: #777;
   background: white;

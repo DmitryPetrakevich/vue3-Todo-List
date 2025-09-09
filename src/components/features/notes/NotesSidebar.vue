@@ -49,24 +49,24 @@ const store = useNoteStore();
     font-weight: 500;
     margin-top: 10px;
     margin-bottom: 5px;
-    border: 1px solid darkgreen;
+    border: 1px solid rgb(85, 87, 85);
     border-radius: 5px;
     color: #2d2d2d;
-    background-color: #8dbc9a;
+    background-color: #b1d1ba;
     padding: 4px 0;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
 
     &.active {
-      background-color: #568464;
+      background-color: #73a482;
     }
 
     &:hover {
-      background-color: #568464;
+      background-color: #73a482;
     }
 
     &:active {
-       background-color: #74a282;
+       background-color: #b1cdba;
     }
   }
 }

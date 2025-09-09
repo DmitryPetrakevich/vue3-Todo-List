@@ -22,7 +22,7 @@ export const useNoteStore = defineStore("note", {
       this.saveToLocalStorage();
     },
 
-deleteNote(id) {
+  deleteNote(id) {
   const index = this.notes.findIndex((note) => note.id === id);
 
   if (index !== -1) {

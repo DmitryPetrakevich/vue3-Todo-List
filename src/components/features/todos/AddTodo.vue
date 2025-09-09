@@ -1,4 +1,3 @@
-!
 <template>
   <div class="add-todo">
     <div class="add-todo__container">
@@ -7,7 +6,13 @@
         class="add-todo-input"
         placeholder="Добавить задачу..."
       />
-      <button type="submit" class="add-todo-btn" @click="submitTodo">+</button>
+      <button 
+      type="submit" 
+      class="add-todo-btn" 
+      @click="submitTodo"
+      >
+        +
+      </button>
     </div>
   </div>
 </template>

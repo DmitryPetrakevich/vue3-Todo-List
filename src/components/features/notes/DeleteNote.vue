@@ -4,7 +4,7 @@
         @click="deelteActiveNote"
         class="delete-note-btn"
         >
-            Удалить 
+        Удалить 
         </button>
     </div>
 </template>
@@ -19,7 +19,6 @@ function deelteActiveNote() {
         store.deleteNote(store.activeNoteId)
     }
 }
-
 </script>
 
 <style scoped lang="less">

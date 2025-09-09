@@ -115,12 +115,6 @@ export const usePomodoroStore = defineStore("pomodoro", {
       }
     },
 
-  //   playSound(filename) {
-  //     console.log("Hello")
-  //     const audio = new Audio(`/sounds/${filename}`);
-  //     audio.play();
-  // }
-
     playSound(filename) {
         let audioSrc;
         
