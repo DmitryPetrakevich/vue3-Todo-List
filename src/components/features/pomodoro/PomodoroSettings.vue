@@ -70,8 +70,7 @@
   .pomodoro-settings {
     position: fixed;
     right: 0;
-    top: 80px;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 60px);
     border: 1px solid grey;
     background-color: #e2e2e2;
     z-index: 100;

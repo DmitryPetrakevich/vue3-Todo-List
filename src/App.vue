@@ -34,7 +34,7 @@ export default {
 
 <style lang="less">
 .main {
-  margin-top: 80px;
+  margin-top: 60px;
   margin-left: 295px;
   background-color: #f5f5f5;
 }

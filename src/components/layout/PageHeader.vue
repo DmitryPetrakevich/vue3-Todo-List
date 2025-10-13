@@ -23,13 +23,19 @@ export default {};
   top: 0;
   left: 0;
   width: 100%;
-  height: 80px;
+  height: 60px;
   z-index: 100;
   background-color: #e2e2e2;
   border-bottom: solid 1px grey;
 
   &__container {
     /* Контейнер, нужно будет сделать миксин */
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
     box-sizing: border-box;
     width: 100%;
     max-width: 1414px;
@@ -37,13 +43,6 @@ export default {};
     margin-right: auto;
     padding-left: 20px;
     padding-right: 20px;
-
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    height: 100%;
   }
 
   &__logo {

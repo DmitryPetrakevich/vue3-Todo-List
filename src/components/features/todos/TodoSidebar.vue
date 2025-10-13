@@ -35,9 +35,8 @@ export default {
 .sidebar {
   position: fixed;
   left: 0;
-  top: 80px;
   width: 300px;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 60px);
   border: solid 1px grey;
   border-top: none;
   background-color: #e2e2e2;

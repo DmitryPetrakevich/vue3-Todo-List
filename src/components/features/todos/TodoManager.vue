@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="add-todo-section">
-      <AddTodo @add-todo="addTodo" />
+      <AddTodo @add-todo="todoStore.addTodo" />
       <DeleteAllTodos @delete-todos="showDeleteWindow = true" />
       <TodosFilter @sort="sortTodos" />
       <UpdateTodos @update-todos="updateTodos" />
@@ -12,14 +12,7 @@
         @confirm="confirmDeleteAll"
       />
     </div>
-
-    <TodoView
-      :todos="todos"
-      @toggle-completed="toggleCompleted"
-      @delete-todo="deleteTodo"
-      @edit-todo="editTodo"
-      @update-priority="updatePriority"
-    />
+    <TodoView/>
   </div>
 </template>
 
@@ -50,43 +43,17 @@ export default {
     };
   },
 
-  computed: {
-    todos() {
-      return this.todoStore.todos;
-    },
-  },
-
   created() {
     this.todoStore = useTodoStore();
   },
 
   methods: {
-    addTodo(todoText) {
-      this.todoStore.addTodo(todoText);
-    },
-
     sortTodos(criteria) {
       this.todoStore.sortTodos(criteria);
     },
 
     updateTodos() {
       this.todoStore.updateTodos();
-    },
-
-    toggleCompleted(id) {
-      this.todoStore.toggleCompleted(id);
-    },
-
-    deleteTodo(id) {
-      this.todoStore.deleteTodo(id);
-    },
-
-    editTodo(payload) {
-      this.todoStore.editTodo(payload);
-    },
-
-    updatePriority(payload) {
-      this.todoStore.updatePriority(payload);
     },
 
     confirmDeleteAll() {

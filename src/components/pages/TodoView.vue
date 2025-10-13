@@ -1,25 +1,24 @@
-!
 <template>
-  <div class="todo-list">
+  <div class="todo-view">
     <transition-group
       name="todo-animation"
       tag="div"
-      class="todo-list__container"
+      class="todo-view__list"
     >
       <TodoItem
         v-for="todo in todos"
         :key="todo.id"
         :todo="todo"
         @toggle-completed="toggleCompleted"
-        @delete-todo="handleDeleteTodo"
-        @edit-todo="handleEditTodo"
-        @update-priority="handleUpdatePriority"
-        @update-date="todoStore.updateDate"
+        @delete-todo="deleteTodo"
+        @edit-todo="editTodo"
+        @update-priority="updatePriority"
+        @update-date="updateDate"
       />
 
       <div
         v-if="todos.length === 0"
-        class="no-todos"
+        class="todo-view__empty"
       >
         <p>Тут пока нет задач</p>
       </div>
@@ -36,49 +35,57 @@
       TodoItem,
     },
 
-    props: ["todos"],
-
     data() {
       return {
         todoStore: useTodoStore(),
       };
     },
 
+    computed: {
+      todos() {
+        return this.todoStore.todos;
+      },
+  },
+
     methods: {
-      toggleCompleted(todoId) {
-        this.$emit("toggle-completed", todoId);
-      },
+    toggleCompleted(todoId) {
+      this.todoStore.toggleCompleted(todoId);
+    },
 
-      handleDeleteTodo(todoId) {
-        this.$emit("delete-todo", todoId);
-      },
+    deleteTodo(todoId) {
+      this.todoStore.deleteTodo(todoId);
+    },
 
-      handleEditTodo(payload) {
-        this.$emit("edit-todo", payload);
-      },
+    editTodo(payload) {
+      this.todoStore.editTodo(payload);
+    },
 
-      handleUpdatePriority({ id, priority }) {
-        this.$emit("update-priority", { id, priority });
-      },
+    updatePriority(payload) {
+      this.todoStore.updatePriority(payload);
+    },
+
+    updateDate(payload) {
+      this.todoStore.updateDate(payload);
+    },
     },
   };
 </script>
 
 <style lang="less">
-  .todo-list {
+  .todo-view {
     height: 100vh;
     margin-left: 10px;
     margin-top: 30px;
     background-color: #f5f5f5;
 
-    &__container {
+    &__list {
       display: flex;
       flex-direction: column;
       gap: 15px;
     }
   }
 
-  .no-todos {
+  .todo-view__empty {
     margin-left: 240px;
     margin-top: 20px;
     color: #ef0000;
