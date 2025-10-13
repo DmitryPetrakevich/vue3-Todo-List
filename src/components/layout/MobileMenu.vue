@@ -1,12 +1,11 @@
 <template>
-  <div class="sidebar" :class="{ open: isOpen }">
-    <div class="sidebar__container">
+  <div class="mobile-menu" :class="{ open: isOpen }">
+    <div class="mobile-menu__container">
       <button
-        class="sidebar-btn"
         v-for="tab in tabs"
         :key="tab.id"
-        @click="$emit('changeTab', tab.id)"
-        :class="{ active: activeTab === tab.id }"
+        class="mobile-menu__btn"
+        @click="handleClick(tab.id)"
       >
         {{ tab.title }}
       </button>
@@ -17,10 +16,9 @@
 <script>
 export default {
   props: {
-    activeTab: String,
     isOpen: Boolean,
   },
-
+  emits: ["change-tab", "close"],
   data() {
     return {
       tabs: [
@@ -30,24 +28,33 @@ export default {
       ],
     };
   },
+  methods: {
+    handleClick(id) {
+      this.$emit("change-tab", id);
+      this.$emit("close"); // закрыть меню после выбора
+    },
+  },
 };
 </script>
 
 <style lang="less">
-.sidebar {
+.mobile-menu {
   position: fixed;
+  top: 60px;
   left: 0;
-  width: 300px;
+  width: 250px;
   height: calc(100vh - 60px);
-  border: solid 1px grey;
-  border-top: none;
-  background-color: #e2e2e2;
+  background: #e2e2e2;
+  border-right: 1px solid grey;
+  z-index: 300;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
 
-  @media (max-width: 1024px) {
-    width: 250px;
+  &.open {
+    transform: translateX(0);
   }
 
-  @media (max-width: 768px) {
+  @media (min-width: 769px) {
     display: none;
   }
 
@@ -55,16 +62,14 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 30px;
   }
 
-  &-btn {
-    display: block;
-    box-sizing: border-box;
+  &__btn {
     width: 80%;
     font-size: 16px;
     font-weight: 500;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 10px 0;
     border: none;
     border-radius: 5px;
     color: white;
@@ -76,7 +81,6 @@ export default {
     &:hover {
       background-color: #36996b;
     }
-
     &:active {
       background-color: #2c7c57;
     }

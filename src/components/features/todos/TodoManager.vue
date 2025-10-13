@@ -1,11 +1,15 @@
 <template>
-  <div>
-    <div class="add-todo-section">
+  <div class="todo-manager">
+    <div class="todo-manager__container">
       <AddTodo @add-todo="todoStore.addTodo" />
-      <DeleteAllTodos @delete-todos="showDeleteWindow = true" />
-      <TodosFilter @sort="sortTodos" />
-      <UpdateTodos @update-todos="updateTodos" />
 
+      <div class="todo-manager__options">
+        <DeleteAllTodos @delete-todos="showDeleteWindow = true" />
+        <TodosFilter @sort="sortTodos" />
+        <UpdateTodos @update-todos="updateTodos" />
+      </div>
+
+      
       <DeleteAllTodosWindow
         v-if="showDeleteWindow"
         @cancel="showDeleteWindow = false"
@@ -65,5 +69,29 @@ export default {
 </script>
 
 <style scoped lang="less">
+.todo-manager {
+
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: start;
+    }
+  }
+
+  &__options {
+    display: flex;
+    margin-left: 10px;
+
+    @media (max-width: 768px) {
+      gap: 10px;
+
+    }
+  }
+}
 
 </style>

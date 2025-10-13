@@ -83,6 +83,10 @@
       flex-direction: column;
       gap: 15px;
     }
+
+    // @media (max-width: 768px) {
+    //   margin-left: 0px;
+    // }
   }
 
   .todo-view__empty {

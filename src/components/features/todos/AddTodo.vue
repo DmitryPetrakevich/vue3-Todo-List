@@ -43,6 +43,12 @@ export default {
   margin-left: 10px;
   display: flex;
   background-color: #f5f5f5;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
+
 }
 
 .add-todo__container {
@@ -56,6 +62,8 @@ export default {
   border-radius: 8px;
   background-color: #f9f9f9;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+
 }
 
 .add-todo-input {
