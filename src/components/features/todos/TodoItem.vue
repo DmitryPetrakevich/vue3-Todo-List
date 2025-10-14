@@ -56,7 +56,9 @@
           @click="startEditing"
           type="button"
         >
-          ✏️
+          <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15.4998 5.50067L18.3282 8.3291M13 21H21M3 21.0004L3.04745 20.6683C3.21536 19.4929 3.29932 18.9052 3.49029 18.3565C3.65975 17.8697 3.89124 17.4067 4.17906 16.979C4.50341 16.497 4.92319 16.0772 5.76274 15.2377L17.4107 3.58969C18.1918 2.80865 19.4581 2.80864 20.2392 3.58969C21.0202 4.37074 21.0202 5.63707 20.2392 6.41812L8.37744 18.2798C7.61579 19.0415 7.23497 19.4223 6.8012 19.7252C6.41618 19.994 6.00093 20.2167 5.56398 20.3887C5.07171 20.5824 4.54375 20.6889 3.48793 20.902L3 21.0004Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </button>
 
         <button
@@ -64,7 +66,9 @@
           type="button"
           class="delete-btn"
         >
-          ×
+            <svg fill="currentColor" width="100%" height="100%" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 14.545L1.455 16 8 9.455 14.545 16 16 14.545 9.455 8 16 1.455 14.545 0 8 6.545 1.455 0 0 1.455 6.545 8z" fill-rule="evenodd"/>
+            </svg>
         </button>
       </div>
     </div>
@@ -265,12 +269,16 @@
 
   .todo-settings {
     display: flex;
-    gap: 10px;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
+    gap: 10px;
   }
 
   .delete-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 26px;
     height: 26px;
     font-size: 18px;
@@ -278,13 +286,11 @@
     border: none;
     background-color: transparent;
     color: #666;
-    border: 1px solid #ccc;
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.2s ease;
 
     &:hover {
-      background-color: #eee;
       color: #ba0808;
     }
   }
@@ -320,14 +326,12 @@
     border: none;
     background-color: transparent;
     color: #666;
-    border: 1px solid #ccc;
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.2s ease;
 
     &:hover {
-      background-color: #eee;
-      color: #000;
+      color: #42b983;
     }
   }
 

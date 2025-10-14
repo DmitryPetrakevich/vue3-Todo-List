@@ -86,10 +86,10 @@ export default {
   &__options {
     display: flex;
     margin-left: 10px;
+    gap: 5px;
 
     @media (max-width: 768px) {
       gap: 10px;
-
     }
   }
 }

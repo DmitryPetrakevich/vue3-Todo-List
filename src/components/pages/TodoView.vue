@@ -78,15 +78,16 @@
     margin-top: 30px;
     background-color: #f5f5f5;
 
+  @media (max-width: 768px) {
+    margin-left: 0;
+
+    }
+
     &__list {
       display: flex;
       flex-direction: column;
       gap: 15px;
     }
-
-    // @media (max-width: 768px) {
-    //   margin-left: 0px;
-    // }
   }
 
   .todo-view__empty {

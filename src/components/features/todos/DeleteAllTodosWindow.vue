@@ -1,26 +1,16 @@
 <template>
-  <div class="delete-todos-window" @click.self="$emit('cancel')">
-    <div class="delete-todos-window__container">
-      <h2 class="delete-todos-window-title">Подтверждение</h2>
-      <hr class="delete-todos-window-divider" />
+  <div class="modal" @click.self="$emit('cancel')">
+    <div class="modal-box">
+      <h2 class="modal-title">Подтверждение</h2>
+      <hr class="modal-divider" />
 
-      <p class="delete-todos-window-text">
-        Вы действительно уверены что хотите удалить все задачи?
+      <p class="modal-text">
+        Вы действительно уверены, что хотите удалить все задачи?
       </p>
 
-      <div class="delete-todos-window-btns">
-        <button class="delete-todos-window-btn-cancel" @click="$emit('cancel')">
-          <span class="delete-todos-window-btn-cancel-text"> Отменить </span>
-        </button>
-
-        <button class="delete-todos-window-btn-confirm">
-          <span
-            @click="$emit('confirm')"
-            class="delete-todos-window-btn-confirm-text"
-          >
-            Удалить
-          </span>
-        </button>
+      <div class="modal-btns">
+        <button class="btn-cancel" @click="$emit('cancel')">Отменить</button>
+        <button class="btn-confirm" @click="$emit('confirm')">Удалить</button>
       </div>
     </div>
   </div>
@@ -28,10 +18,6 @@
 
 <script>
 export default {
-  data() {
-    return {};
-  },
-
   mounted() {
     document.body.classList.add("no-scroll");
     document.addEventListener("keydown", this.handleKeyDown);
@@ -44,103 +30,121 @@ export default {
 
   methods: {
     handleKeyDown(e) {
-      if (e.key === "Escape") {
-        this.$emit("cancel");
-      }
+      if (e.key === "Escape") this.$emit("cancel");
     },
   },
 };
 </script>
 
 <style lang="less">
-.delete-todos-window {
+.modal {
   position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  inset: 0; 
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: rgba(0, 0, 0, 0.4);
   z-index: 500;
 }
 
-.delete-todos-window__container {
-  display: block;
-  position: relative;
-  height: 220px;
-  width: 500px;
-  z-index: 50;
-  padding: 10px 20px;
-  background-color: white;
+.modal-box {
+  background-color: #fff;
   border: 2px solid #42b983;
-  border-radius: 5px;
-}
-
-.delete-todos-window-title {
-  margin: 0;
-  padding: 0;
-  margin-bottom: 10px;
-  font-size: 34px;
-}
-
-.delete-todos-window-text {
-  display: block;
-  text-align: center;
-  margin: 0;
-  padding: 0 20px;
-  padding-top: 15px;
-  margin-bottom: 40px;
-  font-size: 20px;
-}
-
-.delete-todos-window-divider {
+  border-radius: 8px;
+  box-sizing: border-box;
   width: 100%;
+  max-width: 420px; 
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  animation: modal-fade 0.25s ease; 
 }
 
-.delete-todos-window-btns {
+.modal-title {
+  margin: 0 0 10px 0;
+  font-size: 24px; 
+  font-weight: 600;
+  color: #333;
+}
+
+.modal-text {
+  font-size: 16px; 
+  line-height: 1.5;
+  margin-bottom: 30px;
+  color: #444;
+}
+
+.modal-btns {
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  gap: 120px;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-.delete-todos-window-btn-cancel {
-  display: block;
-  box-sizing: border-box;
+.btn-cancel,
+.btn-confirm {
   font-size: 16px;
-  border: 1px solid black;
-  padding: 10px 40px;
+  font-weight: 500;
+  padding: 10px 30px;
+  border-radius: 6px;
   cursor: pointer;
-  background-color: transparent;
-  transition: background-color 0.4s;
+  transition: 0.25s ease;
+  min-width: 120px;
+}
+
+.btn-cancel {
+  background: #fff;
+  border: 1px solid #333;
+  color: #333;
 
   &:hover {
-    background-color: rgb(233, 233, 233);
+    background: #f0f0f0;
   }
 }
 
-.delete-todos-window-btn-confirm {
-  display: block;
-  box-sizing: border-box;
-  font-size: 16px;
+.btn-confirm {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #e33;
+
+  &:hover {
+    color: #ff4d4d;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-box {
+    max-width: calc(100% - 40px);
+    padding: 16px;
+  }
+
+  .modal-btns {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-cancel,
+  .btn-confirm {
+    width: 100%;
+  }
+}
+
+@keyframes modal-fade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-divider {
+  width: 100%;
   border: none;
-  background-color: transparent;
-  color: red;
-}
-
-.delete-todos-window-btn-cancel-text {
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.delete-todos-window-btn-confirm-text {
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: color 0.2s ease;
-
-  &:hover {
-    color: rgb(247, 118, 118);
-  }
+  border-top: 1px solid #ccc;
+  margin: 10px 0 20px 0;
 }
 
 .no-scroll {
