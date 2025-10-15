@@ -1,6 +1,10 @@
 <template>
   <div class="pomodoro-timer">
-    <PomodoroSettings />
+    <PomodoroSettingsModal
+      v-if="showSettings"
+      @close="showSettings = false"
+    />
+
     <h2 class="pomodoro-timer-mode">
       {{
         store.mode === "focus"
@@ -13,8 +17,8 @@
 
     <div class="circle-wrapper">
       <svg
-        width="300"
-        height="300"
+        width="100%"
+        height="100%"
         class="progress-ring"
       >
         <circle
@@ -51,6 +55,7 @@
     </div>
 
     <PomodoroControls 
+    @open-settings="showSettings = true"
     @show-reset-model="showResetWindow = true"
     />
 
@@ -67,16 +72,37 @@
   import { ref, computed } from "vue";
   import { usePomodoroStore } from "@/stores/pomodoroStore";
   import PomodoroControls from "./PomodoroControls.vue";
-  import PomodoroSettings from "./PomodoroSettings.vue";
+  import PomodoroSettingsModal from "./PomodoroSettingsModal.vue";
   import ResetConfirmModal from "./ResetConfirmModal.vue";
 
   const store = usePomodoroStore();
 
+  /**
+ * Состояние видимости модального окна с настройками Pomodoro.
+ * 
+ * Управляется из компонента PomodoroControls при клике на иконку шестерёнки.
+ */
+  const showSettings = ref(false);
+/**
+ * Состояние отображения окна подтверждения сброса рабочей сессии.
+ */
   const showResetWindow = ref(false);
-
+/**
+ * Радиус окружности таймера (в пикселях).
+ * 
+ * Используется для вычисления длины окружности SVG-круга.
+ */
   const radius = 140;
+  /**
+ * Полная длина окружности SVG-круга таймера.
+ */
   const circumference = 2 * Math.PI * radius;
 
+  /**
+ * Вычисляемое свойство для смещения штриха прогресс-бара.
+ * 
+ * Рассчитывает визуальное заполнение кольца в зависимости от оставшегося времени.
+ */
   const progressOffset = computed(() => {
     let duration = 0;
     switch (store.mode) {
@@ -95,23 +121,27 @@
     return circumference * (1 - progress);
   })
 
+  /**
+ * Список булевых значений для визуализации завершённых фокус-сессий.
+ * Каждая точка (dot) отображает одну завершённую Pomodoro-сессию.
+ *
+ * @computed
+ * @returns {boolean[]} Массив, где `true` — завершённая сессия, `false` — оставшаяся.
+ */
   const completedFocusDots = computed(() => {
     const total = store.sessionsBeforeLongBreak; // до long break
     const count = store.focusSessionsCount % total;
     return Array.from({ length: total }, (_, i) => i < count);
   })
 
+  /**
+ * Закрывает модальное окно подтверждения сброса и выполняет сброс таймера.
+ */
   function closeResetModel() {
     store.reset();
     showResetWindow.value = false;
 
   }
-    function playSound(filename) {
-      const audio = new Audio(`/sounds/${filename}`);
-      audio.play();
-  }
-
- 
 </script>
 
 <style scoped lang="less">
@@ -121,50 +151,61 @@
 
   .pomodoro-timer {
     display: flex;
+    position: relative;
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    position: absolute;
     left: 40%;
   }
 
   .circle-wrapper {
     position: relative;
-    width: 300px;
+    max-width: 380px;      
     height: 300px;
   }
 
   .progress-ring {
-    transform: rotate(-90deg); // чтобы начать с вершины круга
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg); 
+      display: block;
   }
 
-  .time-display {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 4rem;
-    font-weight: bold;
-  }
+.progress-ring__circle {
+  transition: stroke-dashoffset 0.3s linear, stroke 0.2s ease;
+}
 
-  .focus-dots {
-    display: flex;
-    position: absolute;
-    top: 65%;
-    left: 50%;
-    transform: translateX(-50%);
-    gap: 10px;
-  }
+.time-display {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(2rem, 6vw, 4rem); 
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  pointer-events: none; 
+}
 
-  .dot {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background-color: #ccc;
-    transition: background-color 0.3s;
-  }
+.focus-dots {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 140px;
+  gap: 10px;
+  position: absolute;
+  top: calc(50% + 35% / 2); 
+  left: 50%;
+  transform: translateX(-50%);
+}
 
-  .dot.active {
-    background-color: #4caf50;
-  }
+.dot {
+  width: clamp(8px, 1.6vw, 15px);
+  height: clamp(8px, 1.6vw, 15px);
+  border-radius: 50%;
+  background-color: #ccc;
+  transition: background-color 0.25s;
+}
+.dot.active {
+  background-color: #4caf50;
+}
 </style>

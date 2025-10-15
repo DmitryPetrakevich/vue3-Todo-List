@@ -104,7 +104,4 @@
         background-color: #36996b;
     }
 }
-
-
-
 </style>
