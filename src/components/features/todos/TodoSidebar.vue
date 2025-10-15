@@ -44,10 +44,6 @@ export default {
   background-color: #e2e2e2;
 
   @media (max-width: 1024px) {
-    width: 250px;
-  }
-
-  @media (max-width: 768px) {
     display: none;
   }
 

@@ -74,6 +74,10 @@ const emit = defineEmits(['open-settings'])
 .pomodoro-controls__container {
     display: flex;
     gap: 30px;
+
+    @media(max-width: 400px) {
+        gap: 15px;
+    }
 }
 
 .pomodoro-controls-reset-timer {

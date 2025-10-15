@@ -31,7 +31,7 @@ export default {
   methods: {
     handleClick(id) {
       this.$emit("change-tab", id);
-      this.$emit("close"); // закрыть меню после выбора
+      this.$emit("close"); 
     },
   },
 };
@@ -54,7 +54,7 @@ export default {
     transform: translateX(0);
   }
 
-  @media (min-width: 769px) {
+  @media (min-width: 1024px) {
     display: none;
   }
 

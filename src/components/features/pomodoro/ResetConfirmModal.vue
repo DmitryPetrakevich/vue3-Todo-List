@@ -1,5 +1,5 @@
 <template>
-    <div class="reset-confirm-model" @click.self="$emit('noReset')">
+    <div class="reset-confirm-model" @click.self="$emit('close')">
         <div class="reset-confirm-model__container">
             <span class="reset-confirm-model-text">
                 При сбросе таймера вся статистика за последнюю сессию не 
@@ -11,13 +11,13 @@
             <div class="reset-confirm-model-btns">
                 <button 
                 class="reset-confirm-model-btn-no"
-                @click="$emit('noReset')"
+                @click="$emit('close')"
                 >
                     нет
                 </button>
                     
                 <button 
-                @click="$emit('yesReset')"
+                @click="$emit('confirm')"
                 class="reset-confirm-model-btn-yes"
                 >
                     Да
@@ -28,15 +28,16 @@
 </template>
 
 <script setup>
+defineEmits(['close', 'confirm']);
 
 </script>
 
 <style scoped lang="less">
 .reset-confirm-model {
     display: flex;
+    position: fixed;
     align-items: center;
     justify-content: center;
-    position: fixed;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.4);
     z-index: 5004;

@@ -42,7 +42,6 @@ export default {
   border-bottom: solid 1px grey;
 
   &__container {
-    /* Контейнер, нужно будет сделать миксин */
     display: flex;
     position: relative;
     flex-direction: row;
@@ -94,7 +93,7 @@ export default {
     transition: all 0.3s ease;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     display: flex; 
   }
 }

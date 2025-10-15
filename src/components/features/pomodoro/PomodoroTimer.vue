@@ -1,9 +1,9 @@
 <template>
   <div class="pomodoro-timer">
-    <PomodoroSettingsModal
+    <!-- <PomodoroSettingsModal
       v-if="showSettings"
       @close="showSettings = false"
-    />
+    /> -->
 
     <h2 class="pomodoro-timer-mode">
       {{
@@ -55,16 +55,9 @@
     </div>
 
     <PomodoroControls 
-    @open-settings="showSettings = true"
-    @show-reset-model="showResetWindow = true"
+      @open-settings="$emit('open-settings')"
+      @show-reset-model="$emit('show-reset')"
     />
-
-    <ResetConfirmModal 
-    v-if="showResetWindow"
-    @noReset="showResetWindow = false"
-    @yesReset="closeResetModel"
-    />
-
   </div>
 </template>
 
@@ -73,9 +66,10 @@
   import { usePomodoroStore } from "@/stores/pomodoroStore";
   import PomodoroControls from "./PomodoroControls.vue";
   import PomodoroSettingsModal from "./PomodoroSettingsModal.vue";
-  import ResetConfirmModal from "./ResetConfirmModal.vue";
 
   const store = usePomodoroStore();
+
+  defineEmits(['open-settings', 'show-reset']);
 
   /**
  * Состояние видимости модального окна с настройками Pomodoro.
@@ -133,30 +127,42 @@
     const count = store.focusSessionsCount % total;
     return Array.from({ length: total }, (_, i) => i < count);
   })
-
-  /**
- * Закрывает модальное окно подтверждения сброса и выполняет сброс таймера.
- */
-  function closeResetModel() {
-    store.reset();
-    showResetWindow.value = false;
-
-  }
 </script>
 
 <style scoped lang="less">
   .pomodoro-timer-mode {
     font-size: 40px;
+    margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
+}
+
+.pomodoro-timer {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+  padding: 0 20px;
+  
+  @media (max-width: 1024px) {
+    left: 50%; 
+    padding: 0 15px;
   }
 
-  .pomodoro-timer {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    left: 40%;
+  @media (max-width: 350px) {
+    padding: 0 10px; 
   }
+}
 
   .circle-wrapper {
     position: relative;
@@ -180,11 +186,14 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: clamp(2rem, 6vw, 4rem); 
+  font-size: 50px;
   font-weight: 700;
   line-height: 1;
   text-align: center;
   pointer-events: none; 
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
 
 .focus-dots {
@@ -199,8 +208,8 @@
 }
 
 .dot {
-  width: clamp(8px, 1.6vw, 15px);
-  height: clamp(8px, 1.6vw, 15px);
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   background-color: #ccc;
   transition: background-color 0.25s;
