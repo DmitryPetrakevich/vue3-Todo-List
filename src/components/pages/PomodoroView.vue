@@ -45,7 +45,7 @@ function handleReset() {
   display: flex;
   position: relative;
   padding: 0 40px;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 60px);
   background-color: #f9f9f9;
 }
 </style>

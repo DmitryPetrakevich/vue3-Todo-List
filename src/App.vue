@@ -65,6 +65,7 @@ export default {
   margin-top: 60px;
   margin-left: 295px;
   padding: 10px;
+  padding-top: 0;
   background-color: #f5f5f5;
 
   @media (max-width: 1024px) {

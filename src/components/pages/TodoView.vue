@@ -73,7 +73,7 @@
 
 <style lang="less">
   .todo-view {
-    height: 100vh;
+    height: calc(100vh - 60px);
     margin-left: 10px;
     margin-top: 30px;
     background-color: #f5f5f5;
